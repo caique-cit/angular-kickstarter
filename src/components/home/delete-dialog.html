@@ -1,0 +1,17 @@
+<md-dialog aria-label="delete" ng-cloak>
+        <md-dialog-content>
+            <div class="md-dialog-content">
+               <h2 class="md-title ng-binding">Would you like to delete your post?</h2>
+            </div>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row">
+            <span flex></span>
+            <md-button type="submit" class="md-primary" ng-click="vm.remove();" aria-label="ok">
+                ok
+            </md-button>
+            <md-button type="button" aria-label="No" ng-click="vm.hideDialog()">
+                No
+            </md-button>
+        </md-dialog-actions>
+</md-dialog>

@@ -1,0 +1,108 @@
+<p class="md-body-1">
+  Clone the <a href="https://github.com/archfirst/angular-material-template">angular-material-template</a>
+  repo and then execute the steps below:
+<p>
+
+<code>
+$ npm install<br/>
+$ gulp serve-dev
+</code>
+
+<ul class="md-body-1">
+  <li>
+    <code>npm install</code> will install the required node libraries under <code>node_modules</code>
+    and then call <code>bower install</code> which will install the required client-side libraries
+    under <code>bower_components</code>.
+  </li>
+  <li>
+    <code>gulp serve-dev</code> will serve up the Angular application in a browser window.
+    It is designed for an efficient development process. As you make changes to the code,
+    the browser will update to reflect the changes immediately.
+  </li>
+</ul>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col s10">
+      <table class="striped centered table-fixed">
+        <thead>
+          <tr>
+              <th data-field="name">
+              <a href="#" ng-click="sortType = 'name'; sortReverse = !sortReverse">
+              Name</a>
+              <span ng-show="sortType == 'name' && !sortReverse" class="fa fa-caret-down">v</span>
+              <span ng-show="sortType == 'name' && sortReverse" class="fa fa-caret-up">^</span>
+              </th>
+              <th data-field="mrc">
+              <a href="#" ng-click="sortType = 'mrc'; sortReverse = !sortReverse">
+              MRC</a>
+              <span ng-show="sortType == 'mrc' && !sortReverse" class="fa fa-caret-down">v</span>
+              <span ng-show="sortType == 'mrc' && sortReverse" class="fa fa-caret-up">^</span>
+              </th>
+              <th data-field="country">
+                <a href="#" ng-click="sortType = 'country'; sortReverse = !sortReverse">
+                Country</a>
+                <span ng-show="sortType == 'country' && !sortReverse" class="fa fa-caret-down">v</span>
+                <span ng-show="sortType == 'country' && sortReverse" class="fa fa-caret-up">^</span>
+              </th>
+              <th data-field="region">
+                <a href="#" ng-click="sortType = 'region'; sortReverse = !sortReverse">
+                Local/Regional</a>
+                <span ng-show="sortType == 'region' && !sortReverse" class="fa fa-caret-down">v</span>
+                <span ng-show="sortType == 'region' && sortReverse" class="fa fa-caret-up">^</span>
+              </th>
+              <th data-field="functional-area">
+                <a href="#" ng-click="sortType = 'functional-area'; sortReverse = !sortReverse">
+                Functional Area</a>
+                <span ng-show="sortType == 'functional-area' && !sortReverse" class="fa fa-caret-down">v</span>
+                <span ng-show="sortType == 'functional-area' && sortReverse" class="fa fa-caret-up">^</span>
+              </th>
+              <th data-field="smart-scope-flag">
+               <a href="#" ng-click="sortType = 'smart-scope-flag'; sortReverse = !sortReverse">
+                Smart Scope Flag</a>
+                <span ng-show="sortType == 'smart-scope-flag' && !sortReverse" class="fa fa-caret-down">v</span>
+                <span ng-show="sortType == 'smart-scope-flag' && sortReverse" class="fa fa-caret-up">^</span>
+              </th>
+              <th data-field="suply-chain-flag">
+                <a href="#" ng-click="sortType = 'suply-chain-flag'; sortReverse = !sortReverse">
+                Suply Chain Flag</a>
+                <span ng-show="sortType == 'suply-chain-flag' && !sortReverse" class="fa fa-caret-down">v</span>
+                <span ng-show="sortType == 'suply-chain-flag' && sortReverse" class="fa fa-caret-up">^</span>
+              </th>
+              <th data-field="responsible">
+               <a href="#" ng-click="sortType = 'responsible'; sortReverse = !sortReverse">
+                Responsible</a>
+                <span ng-show="sortType == 'responsible' && !sortReverse" class="fa fa-caret-down">v</span>
+                <span ng-show="sortType == 'responsible' && sortReverse" class="fa fa-caret-up">^</span></th>
+              <th data-field="actions">Actions</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr ng-repeat="data in costCenter | orderBy:sortType:sortReverse">
+            <td>{{data.name}}</td>
+            <td>{{data.mrc}}</td>
+            <td>{{data.country}}</td>
+            <td>{{data.region}}</td>
+            <td>{{data.functionalArea}}</td>
+            <td>{{data.smartScopeFlag}}</td>
+            <td>{{data.supplyChainFlag}}</td>
+            <td>{{data.responsible}}</td>
+            <td>
+              <a class="waves-effect waves-light btn blue" style="width: 100px;">Edit</a>
+              <a class="waves-effect waves-light btn red" style="width: 100px;">Delete</a>
+            </td>
+          </tr>
+
+
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+
+

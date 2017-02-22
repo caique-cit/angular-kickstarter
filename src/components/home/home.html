@@ -1,0 +1,24 @@
+  <md-button md-no-ink class="md-raised md-primary md-button md-ink-ripple" href="/post/new">New Post</md-button>
+  <md-content class="md-padding _md layout-xs-column layout-row" layout-xs="column" layout="row">
+  <div flex-xs="" flex-gt-xs="50" layout="column" class="layout-column flex-xs flex-gt-xs-50" ng-repeat="post in vm.posts">
+    <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
+      <md-card-title>
+        <md-card-title-text>
+          <span class="md-headline">{{post.title}}</span>
+        </md-card-title-text>
+      </md-card-title>
+      <md-card-content>
+        <p>{{post.content}}</p>
+
+        <div ng-repeat="comment in post.comments">
+          <h3>Comments</h3>
+          {{comment.content}}
+        </div>
+      </md-card-content>
+      <md-card-actions layout="row" layout-align="end center">
+        <md-button href="/post/edit/{{post.id}}">Edit</md-button>
+        <md-button ng-click="vm.showDialog(post)">Delete</md-button>
+      </md-card-actions>
+    </md-card>
+  </div>
+</md-content>
