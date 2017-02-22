@@ -33,7 +33,7 @@
 
     function LoginServiceFunction($http, ENDPOINT_URI) {
         var service = this,
-            path = 'api/';
+            path = 'api/token/';
 
         function getUrl() {
             return ENDPOINT_URI + path;
