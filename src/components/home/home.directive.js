@@ -46,7 +46,7 @@
             logger.log('Activated Home View');
 
             HomeService.getPosts().then(function(data) {
-                vm.posts = data.data;
+                vm.posts = data.data.posts;
             });
         }
 
