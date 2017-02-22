@@ -20,7 +20,6 @@
         '$mdThemingProvider',
         'exceptionHandlerProvider',
         '$httpProvider',
-        'uiSelectConfig'
     ];
 
     /* @ngInject */
@@ -30,7 +29,7 @@
         $mdIconProvider,
         $mdThemingProvider,
         exceptionHandlerProvider,
-        $httpProvider, uiSelectConfig) {
+        $httpProvider) {
 
         // During development, you may want to set debugInfoEnabled to true. This is required for tools like
         // Protractor, Batarang and ng-inspector to work correctly. However do not check in this change.
@@ -74,7 +73,5 @@
 
 
         $httpProvider.interceptors.push('APIInterceptor');
-
-        uiSelectConfig.theme = 'bootstrap';
     }
 })();

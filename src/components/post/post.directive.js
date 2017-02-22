@@ -27,32 +27,15 @@
 
         function ControllerFunction(PostService, $location, $scope, $stateParams) {
             var vm = this;
-            vm.country = ['Brazil', 'China', 'US', 'Argentina'];
-            vm.mrc = ['Brazil', 'China', 'US', 'Argentina'];
-
 
             init();
 
             function init() {
-
-
-
-
                 if($stateParams.id) {
                     PostService.getUpdatePost().then(function(dataPost) {
                         $scope.post = dataPost.data;
                     });
                 }
-            }
-
-            vm.change = function() {
-                var key = $scope.$watch('vm.selectedCountry', function() {
-                    return $scope.vm.selectedCountry;
-                });
-
-                console.log(key);
-
-
             }
 
 

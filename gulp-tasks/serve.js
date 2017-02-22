@@ -33,8 +33,10 @@ module.exports = function (config) {
             server: {
                 baseDir: isDev ? config.tempDir : config.buildDir,
                 routes: isDev ? {
+                    '/bower_components': './bower_components',
+                    '/fonts': './bower_components/bootstrap-sass/assets/fonts',
                     '/src': config.sourceDir,
-                    '/assets/images': config.sourceDir + 'images',
+                    '/images': config.sourceDir + 'images',
                     '/.tmp': config.tempDir
                 } : {},
                 middleware: [

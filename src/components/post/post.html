@@ -29,37 +29,7 @@ d<md-content layout-padding>
       <span ng-show="postForm.$submitted && postForm.content.$error.minlength">
         Content must have at least 5 caracteres
       </span>
-    </md-input-container>
-
-   <!--  <ui-select multiple ng-model="vm.selectedCoutry" ng-disabled="ctrl.disabled" sortable="true" close-on-select="false" style="width: 600px;" data-ng-change="vm.change()">
-      <ui-select-match allow-clear="true" placeholder="Select Coutry...">{{$item}}</ui-select-match>
-      <ui-select-choices repeat="country in vm.country | filter: $select.search">
-        <div ng-model="post.itemSelected" ng-bind-html="country | highlight: $select.search"></div>
-      </ui-select-choices>
-    </ui-select> -->
-
-     <ui-select ng-model="vm.selectedCoutry" style="width: 300px;" title="Choose a country">
-    <ui-select-match placeholder="Select or search a country in the list..." style="color: white;">{{$select.selected.name}}</ui-select-match>
-    <ui-select-choices repeat="country in vm.country | filter: $select.search">
-      <span ng-bind-html="country | highlight: $select.search"></span>
-
-    </ui-select-choices>
-  </ui-select>
-
-     <ui-select multiple ng-model="vm.selectedMrc" ng-disabled="ctrl.disabled" sortable="true" close-on-select="false" style="width: 600px;">
-      <ui-select-match allow-clear="true" placeholder="Select mrc...">{{$item}}</ui-select-match>
-      <ui-select-choices repeat="mrc in vm.mrc | filter: $select.search">
-        <div ng-model="post.itemSelected" ng-bind-html="mrc | highlight: $select.search"></div>
-      </ui-select-choices>
-    </ui-select>
-
-    <p>Selected: {{vm.selectedPeople}}</p>
-
-    <div input-field style="width: 200px;">
-      <select class="" ng-model="select.value3" material-select multiple watch style="width: 200px;">
-          <option ng-repeat="value in vm.value">{{value}}</option>
-      </select>
-  </div>
+    </md-input-container>    
     <md-button type="submit" class="md-primary"
       ng-class="{'md-raised md-hue-1': (postForm.$dirty && postForm.$valid) }"
       aria-label="Add" ng-disabled="postForm.$invalid">
@@ -68,4 +38,3 @@ d<md-content layout-padding>
     <md-button md-no-ink class="md-primary" href="/">Back</md-button>
   </form>
 </md-content>
-

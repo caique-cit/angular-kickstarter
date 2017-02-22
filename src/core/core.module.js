@@ -8,6 +8,6 @@
         'fw.exception', 'fw.logger',
 
         // 3rd Party modules
-        'ui.router', 'angular-storage', 'ui.select', 'ui.materialize'
+        'ui.router', 'angular-storage'
     ])
 })();
