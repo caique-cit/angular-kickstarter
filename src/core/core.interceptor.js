@@ -5,9 +5,7 @@
         .module('app.core')
         .service('CoreInterceptor', CoreInterceptor)
 
-
         CoreInterceptor.$inject = ['$rootScope', '$injector'];
-
 
         function CoreInterceptor($rootScope, $injector) {
             let service = this;

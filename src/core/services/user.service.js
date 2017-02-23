@@ -63,10 +63,5 @@
             function _getLogUrl(action) {
                 return _getUrl() + action;
             }
-
-            // User Roles definition
-            PermRoleStore
-                .defineRole('ROLE_ADMIN', [])
-                .defineRole('ROLE_USER', []);
         }
 })();

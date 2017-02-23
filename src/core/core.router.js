@@ -17,7 +17,12 @@
             $stateProvider
                 .state('home', {
                     url: '/',
-                    template: '<tmpl-home></tmpl-home>'
+                    template: '<tmpl-home></tmpl-home>',
+                    data: {
+                        permissions: {
+                            only: ['ROLE_USER', 'ROLE_ADMIN']
+                        }
+                    }
                 })
 
                 .state('quickstart', {
