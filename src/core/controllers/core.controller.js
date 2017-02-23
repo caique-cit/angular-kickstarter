@@ -4,10 +4,10 @@
     angular.module('app.core')
       .controller('MainCtrl', ControllerFunction);
 
-      ControllerFunction.$inject = ['$rootScope', '$state', 'LoginService', 'UserService'];
+      ControllerFunction.$inject = ['$rootScope', '$state', 'UserService'];
 
 
-    function ControllerFunction($rootScope, $state, LoginService, UserService) {
+    function ControllerFunction($rootScope, $state, UserService) {
         var main = this;
 
         function logout() {
@@ -25,8 +25,8 @@
         });
 
         $rootScope.$on('unauthorized', function() {
-            main.currentUser = UserService.setCurrentUser(null);
-            //$state.go('login');
+            //main.currentUser = UserService.setCurrentUser(null);
+
         });
 
         main.logout = logout;

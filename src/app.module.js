@@ -6,11 +6,11 @@
         'app.core',
 
         // Features (listed alphabetically)
-        'app.quickstart',
         'app.approot',
         'app.home',
         'app.login',
-        'app.toolbar',
-        'app.post'
+        'app.post',
+        'app.quickstart',
+        'app.toolbar'
     ]);
 })();

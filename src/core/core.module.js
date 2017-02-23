@@ -4,12 +4,11 @@
     angular.module('app.core', [
         'ngAnimate', 'ngMaterial', 'ngSanitize',
 
-        'ngFirewall',
 
         // Our reusable framework
         'fw.exception', 'fw.logger',
 
         // 3rd Party modules
-        'ui.router', 'angular-storage'
+        'ui.router', 'permission', 'permission.ui', 'angular-storage'
     ])
 })();

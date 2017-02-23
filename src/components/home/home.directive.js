@@ -45,8 +45,10 @@
         function activate() {
             logger.log('Activated Home View');
 
-            HomeService.getPosts().then(function(data) {
-                vm.posts = data.data.posts;
+            HomeService.getPosts().then(function(response) {
+                if (response && response.data) {
+                    vm.posts = response.data.posts;
+                }                
             });
         }
 

@@ -22,11 +22,9 @@
 
 
         function signIn(user) {
-            UserService.login(user)
+            LoginService.login(user)
                 .then(function(response) {
-                    user.accessToken = response.data.token;
-                    user.refreshToken = response.data.refresh_token;
-                    user.roles = response.data.user.roles;
+                    user.access_token = response.data.token;
                     UserService.setCurrentUser(user);
                     $rootScope.$broadcast('authorized');
                     //$state.go('home');
@@ -34,7 +32,7 @@
         }
 
         function register(user) {
-            UserService.register(user)
+            LoginService.register(user)
                 .then(function(response) {
                     login(user)
                 });
