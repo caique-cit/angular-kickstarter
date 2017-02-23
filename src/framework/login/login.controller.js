@@ -25,11 +25,9 @@
             UserService.login(user)
                 .then(function(response) {
                     user.accessToken = response.data.token;
-                    user.refreshToken = response.data.refresh_token;
-                    user.roles = response.data.user.roles;
                     UserService.setCurrentUser(user);
                     $rootScope.$broadcast('authorized');
-                    //$state.go('home');
+                    $state.go('home');
                 });
         }
 
@@ -42,7 +40,6 @@
 
         function handleSubmit(user) {
             vm.newUser ? register(user) : signIn(user);
-            return $mdDialog.hide();
         }
 
         function handleCancel() {

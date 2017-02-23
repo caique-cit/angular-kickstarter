@@ -37,9 +37,12 @@
 
             function setCurrentUser (user) {
                 currentUser = user;
-                delete user.password;
 
-                store.set('user', user);
+                let dataUser = {};
+                dataUser.userName = user.username;
+                dataUser.accesToken = user.accessToken;
+
+                store.set('user', dataUser);
                 return currentUser;
             }
 

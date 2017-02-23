@@ -1,18 +1,18 @@
 (function () {
     'use strict';
 
-    angular
-        .module('app.core')
-        .config(configFunction);
+    var core = angular.module('app.core');
 
-        configFunction.$inject = ['$locationProvider', '$stateProvider', '$urlRouterProvider', '$httpProvider'];
+    core.config(configFunction);
 
-        /* @ngInject */
-        function configFunction($locationProvider, $stateProvider, $urlRouterProvider, $httpProvider) {
+    configFunction.$inject = ['$locationProvider', '$stateProvider', '$urlRouterProvider', '$httpProvider'];
 
-            $locationProvider.html5Mode(true);
+    /* @ngInject */
+    function configFunction($locationProvider, $stateProvider, $urlRouterProvider) {
 
-            $urlRouterProvider.otherwise('/');
+        $locationProvider.html5Mode(true);
+
+        $urlRouterProvider.otherwise('/login');
 
             $stateProvider
                 .state('home', {
@@ -40,5 +40,13 @@
                     template: '<tpl-post></tpl-post>',
                 })
 
-        }
+                .state('login', {
+                    url: '/login',
+                    templateUrl: 'src/framework/login/login.html',
+                    controller: 'LoginDialogController',
+                    controllerAs:'vm'
+                })
+
+
+    }
 })();

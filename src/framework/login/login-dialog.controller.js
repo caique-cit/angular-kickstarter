@@ -3,7 +3,7 @@
     'use strict';
 
     angular.module('app.login')
-        .controller('LoginDialogController', ControllerFunction);
+        .controller('LoginController', ControllerFunction);
 
     // ----- ControllerFunction -----
     ControllerFunction.$inject = ['$mdDialog', 'UserService', '$state', '$rootScope'];
@@ -22,17 +22,17 @@
 
 
         function signIn(user) {
-            LoginService.login(user)
+            UserService.login(user)
                 .then(function(response) {
-                    user.access_token = response.data.token;
+                    user.accessToken = response.data.token;
                     UserService.setCurrentUser(user);
                     $rootScope.$broadcast('authorized');
-                    //$state.go('home');
+                    $state.go('home');
                 });
         }
 
         function register(user) {
-            LoginService.register(user)
+            UserService.register(user)
                 .then(function(response) {
                     login(user)
                 });
@@ -40,7 +40,6 @@
 
         function handleSubmit(user) {
             vm.newUser ? register(user) : signIn(user);
-            return $mdDialog.hide();
         }
 
         function handleCancel() {
