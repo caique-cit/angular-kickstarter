@@ -20,6 +20,7 @@
         '$mdThemingProvider',
         'exceptionHandlerProvider',
         '$httpProvider',
+        '$authProvider'
     ];
 
     /* @ngInject */
@@ -29,7 +30,8 @@
         $mdIconProvider,
         $mdThemingProvider,
         exceptionHandlerProvider,
-        $httpProvider) {
+        $httpProvider,
+        $authProvider){
 
         // During development, you may want to set debugInfoEnabled to true. This is required for tools like
         // Protractor, Batarang and ng-inspector to work correctly. However do not check in this change.

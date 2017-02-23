@@ -26,16 +26,26 @@
         ControllerFunction.$inject = ['PostService', '$location', '$scope', '$stateParams'];
 
         function ControllerFunction(PostService, $location, $scope, $stateParams) {
-            var vm = this;
+            let vm = {
+                post: {}
+            }
 
             init();
 
             function init() {
-                if($stateParams.id) {
-                    PostService.getUpdatePost().then(function(dataPost) {
-                        $scope.post = dataPost.data;
-                    });
-                }
+
+              if($stateParams.id) {
+                _populateViewModel();
+              }
+            }
+
+            function _populateViewModel() {
+                  PostService.getUpdatePost().then(function(dataPost) {
+                      vm.post = dataPost.data.data;
+                      vm.post.title = vm.post.title;
+                      vm.post.slug = vm.post.slug;
+                      vm.post.content = vm.post.content;
+                  });
             }
 
 
@@ -48,13 +58,14 @@
                     });
 
                 } else {
-
-                    PostService.addPosts(post).then(function() {
+                    PostService.addPosts(vm.post).then(function() {
 
                     }).finally(function() {
                         $location.path('/');
                     });
                 }
             };
+
+            return vm;
         };
 })();

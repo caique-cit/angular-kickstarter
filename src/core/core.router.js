@@ -5,10 +5,10 @@
 
     core.config(configFunction);
 
-    configFunction.$inject = ['$locationProvider', '$stateProvider', '$urlRouterProvider', '$httpProvider'];
+    configFunction.$inject = ['$locationProvider', '$stateProvider', '$urlRouterProvider', '$httpProvider', '$authProvider'];
 
     /* @ngInject */
-    function configFunction($locationProvider, $stateProvider, $urlRouterProvider) {
+    function configFunction($locationProvider, $stateProvider, $urlRouterProvider, $authProvider) {
 
         $locationProvider.html5Mode(true);
 

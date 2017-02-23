@@ -1,8 +1,8 @@
-d<md-content layout-padding>
-  <form name="postForm" data-ng-submit="vm.register(post)" novalidate>
+<md-content layout-padding>
+  <form name="postForm" data-ng-submit="vm.register(vm.post)" novalidate>
     <md-input-container>
       <label>Title</label>
-      <input name="title" ng-model="post.title" ng-minlength="5" required>
+      <input name="title" ng-model="vm.post.title" ng-minlength="5" required>
       <span class="form-control alert-danger" ng-show="postForm.title.$error.required && postForm.$submitted">
         Title is required
       </span>
@@ -12,7 +12,7 @@ d<md-content layout-padding>
     </md-input-container>
     <md-input-container>
       <label>Slug</label>
-      <input name="slug" ng-model="post.slug" ng-minlength="5" required>
+      <input name="slug" ng-model="vm.post.slug" ng-minlength="5">
       <span ng-show="postForm.slug.$error.required && postForm.$submitted">
         Slug is required
       </span>
@@ -22,14 +22,14 @@ d<md-content layout-padding>
     </md-input-container>
     <md-input-container>
       <label>Content</label>
-      <input ng-model="post.content" ng-minlength="5" required>
+      <input ng-model="vm.post.content" ng-minlength="5" required>
       <span ng-show="postForm.content.$error.required && postForm.$submitted">
         Content is required
       </span>
       <span ng-show="postForm.$submitted && postForm.content.$error.minlength">
         Content must have at least 5 caracteres
       </span>
-    </md-input-container>    
+    </md-input-container>
     <md-button type="submit" class="md-primary"
       ng-class="{'md-raised md-hue-1': (postForm.$dirty && postForm.$valid) }"
       aria-label="Add" ng-disabled="postForm.$invalid">

@@ -4,6 +4,8 @@
     angular.module('app.core', [
         'ngAnimate', 'ngMaterial', 'ngSanitize',
 
+        'ngFirewall',
+
         // Our reusable framework
         'fw.exception', 'fw.logger',
 
