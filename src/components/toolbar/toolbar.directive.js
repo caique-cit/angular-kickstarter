@@ -32,7 +32,8 @@
     function ControllerFunction($mdDialog, UserService, $state) {
         let vm  = {
           openDialog: openDialog,
-          logout: logout
+          logout: logout,
+          hideDialog: hideDialog
         }
 
 
@@ -48,6 +49,10 @@
           UserService.logout();
           $mdDialog.hide();
           $state.go('login');
+        }
+
+        function hideDialog() {
+          $mdDialog.hide();
         }
 
         return vm;
