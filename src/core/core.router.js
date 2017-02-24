@@ -25,7 +25,7 @@
                 })
                 .state('public', {
                     url: '/',
-                    template: 'layout/layout.public.html',
+                    templateUrl: 'layout/layout.public.html',
                     abstract: true
                 })
                 .state('private.home', {
@@ -61,7 +61,7 @@
                 })
 
                 .state('public.login', {
-                    url: '/login',
+                    url: 'login',
                     templateUrl: 'src/framework/login/login.html',
                     controller: 'LoginController',
                     controllerAs:'vm',
