@@ -35,15 +35,14 @@
               return currentUser;
             }
 
-            function setCurrentUser (user) {
-                let currentUser = user;
-                let dataUser = {};
+            function setCurrentUser (response) {
+                let dataUser = response.user;
 
-                dataUser.userName = user.username;
-                dataUser.accesToken = user.accessToken;
+                dataUser.accessToken = response.token;
+                dataUser.refreshToken = response.refresh_token;
 
                 store.set('user', dataUser);
-                return currentUser;
+                return dataUser;
             }
 
             function login (credentials) {
@@ -51,7 +50,7 @@
             }
 
             function logout () {
-                store.remove('user');              
+                store.remove('user');
             }
 
             function register (user) {

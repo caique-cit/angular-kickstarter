@@ -3,24 +3,24 @@
 
     angular
         .module('app.core')
-        .run(defineSystemPermissions, defineSystemRoles)
+        .run(defineSystemRoles)
 
-        defineSystemPermissions.$inject = ['PermPermissionStore'];
+        defineSystemRoles.$inject = ['PermRoleStore', 'store'];
 
-        function defineSystemPermissions (PermPermissionStore) {
-            let permissions = ['viewDashboard'];
+        function defineSystemRoles (PermRoleStore, store) {
 
-            PermPermissionStore
-                .defineManyPermissions(permissions, function () {
-                    return true;
-                })
-        }
+            PermRoleStore.defineRole('ROLE_ADMIN', _checkRoles);
+            PermRoleStore.defineRole('ROLE_USER', _checkRoles);
 
-        defineSystemRoles.$inject = ['PermRoleStore'];
+            function _checkRoles (roleName, transitionProperties) {
+                let currentUser = store.get('user');
+                let isPermited = false;
 
-        function defineSystemRoles (PermRoleStore) {
+                if (currentUser) {
+                    isPermited = currentUser.roles.indexOf(roleName) > -1;
+                } 
 
-            PermRoleStore.defineRole('ROLE_ADMIN', ['viewDashboard']);
-            PermRoleStore.defineRole('ROLE_USER', ['viewDashboard']);
+                return isPermited;
+            }
         }
 })();

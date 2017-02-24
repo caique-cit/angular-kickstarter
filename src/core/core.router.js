@@ -1,18 +1,21 @@
 (function () {
     'use strict';
 
-    var core = angular.module('app.core');
+    angular
+        .module('app.core')
+        .config(configFunction);
 
-    core.config(configFunction);
+        configFunction.$inject = ['$locationProvider', '$stateProvider', '$urlRouterProvider', '$httpProvider', '$injector'];
 
-    configFunction.$inject = ['$locationProvider', '$stateProvider', '$urlRouterProvider', '$httpProvider'];
+        /* @ngInject */
+        function configFunction($locationProvider, $stateProvider, $urlRouterProvider, $httpProvider, $injector) {
 
-    /* @ngInject */
-    function configFunction($locationProvider, $stateProvider, $urlRouterProvider) {
+            $locationProvider.html5Mode(true);
 
-        $locationProvider.html5Mode(true);
-
-        $urlRouterProvider.otherwise('/login');
+            $urlRouterProvider.otherwise( function($injector) {
+              var $state = $injector.get("$state");
+              $state.go('/somestate');
+            });
 
             $stateProvider
                 .state('home', {
@@ -20,7 +23,8 @@
                     template: '<tmpl-home></tmpl-home>',
                     data: {
                         permissions: {
-                            // only: ['ROLE_USER', 'ROLE_ADMIN']
+                            only: ['ROLE_USER'],
+                            redirectTo: 'login'
                         }
                     }
                 })
@@ -32,7 +36,13 @@
 
                 .state('edit', {
                     url: '/post/edit/:id',
-                    template: '<tpl-post></tpl-post>'
+                    template: '<tpl-post></tpl-post>',
+                    data: {
+                        permissions: {
+                            only: ['ROLE_ADMIN'],
+                            redirectTo: 'home'
+                        }
+                    }
                 })
 
                 .state('add', {
@@ -44,7 +54,13 @@
                     url: '/login',
                     templateUrl: 'src/framework/login/login.html',
                     controller: 'LoginController',
-                    controllerAs:'vm'
+                    controllerAs:'vm',
+                    data: {
+                        permissions: {
+                            except: ['ROLE_USER'],
+                            redirectTo: 'home'
+                        }
+                    }
                 })
 
 

@@ -23,9 +23,8 @@
 
         function signIn(user) {
             UserService.login(user)
-                .then(function(response) {
-                    user.accessToken = response.data.token;
-                    UserService.setCurrentUser(user);
+                .then(function(response) {                    
+                    UserService.setCurrentUser(response.data);
                     $rootScope.$broadcast('authorized');
                     $state.go('home');
                 });
