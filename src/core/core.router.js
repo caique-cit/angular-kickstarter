@@ -14,43 +14,53 @@
 
             $urlRouterProvider.otherwise( function($injector) {
               var $state = $injector.get("$state");
-              $state.go('/somestate');
+              $state.go('private.home');
             });
 
             $stateProvider
-                .state('home', {
+                .state('private', {
                     url: '/',
+                    templateUrl: 'layout/layout.private.html',
+                    abstract: true
+                })
+                .state('public', {
+                    url: '/',
+                    template: 'layout/layout.public.html',
+                    abstract: true
+                })
+                .state('private.home', {
+                    url: 'dashboard',
                     template: '<tmpl-home></tmpl-home>',
                     data: {
                         permissions: {
                             only: ['ROLE_USER'],
-                            redirectTo: 'login'
+                            redirectTo: 'public.login'
                         }
                     }
                 })
 
-                .state('quickstart', {
+                .state('private.quickstart', {
                     url: '/quickstart',
                     template: '<tmpl-quickstart></tmpl-quickstart>'
                 })
 
-                .state('edit', {
+                .state('private.edit', {
                     url: '/post/edit/:id',
                     template: '<tpl-post></tpl-post>',
                     data: {
                         permissions: {
                             only: ['ROLE_ADMIN'],
-                            redirectTo: 'home'
+                            redirectTo: 'private.home'
                         }
                     }
                 })
 
-                .state('add', {
+                .state('private.add', {
                     url: '/post/new',
                     template: '<tpl-post></tpl-post>',
                 })
 
-                .state('login', {
+                .state('public.login', {
                     url: '/login',
                     templateUrl: 'src/framework/login/login.html',
                     controller: 'LoginController',
@@ -58,7 +68,7 @@
                     data: {
                         permissions: {
                             except: ['ROLE_USER'],
-                            redirectTo: 'home'
+                            redirectTo: 'private.home'
                         }
                     }
                 })
