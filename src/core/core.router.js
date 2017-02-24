@@ -20,7 +20,7 @@
                     template: '<tmpl-home></tmpl-home>',
                     data: {
                         permissions: {
-                            only: ['ROLE_USER', 'ROLE_ADMIN']
+                            // only: ['ROLE_USER', 'ROLE_ADMIN']
                         }
                     }
                 })
@@ -43,7 +43,7 @@
                 .state('login', {
                     url: '/login',
                     templateUrl: 'src/framework/login/login.html',
-                    controller: 'LoginDialogController',
+                    controller: 'LoginController',
                     controllerAs:'vm'
                 })
 

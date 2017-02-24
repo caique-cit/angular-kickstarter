@@ -1,6 +1,6 @@
-<tmpl-toolbar></tmpl-toolbar>
+<tmpl-toolbar ng-if="isLogin"></tmpl-toolbar>
 
-<md-tabs md-border-bottom>
+<md-tabs md-border-bottom ng-if="isLogin">
     <md-tab label="home" ui-sref="home" ui-sref-active="selected"></md-tab>
     <md-tab label="quickstart" ui-sref="quickstart" ui-sref-active="selected"></md-tab>
 </md-tabs>

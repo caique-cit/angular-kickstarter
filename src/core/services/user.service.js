@@ -36,9 +36,9 @@
             }
 
             function setCurrentUser (user) {
-                currentUser = user;
-
+                let currentUser = user;
                 let dataUser = {};
+
                 dataUser.userName = user.username;
                 dataUser.accesToken = user.accessToken;
 
@@ -51,7 +51,7 @@
             }
 
             function logout () {
-                return $http.post(_getLogUrl('logout'));
+                store.remove('user');              
             }
 
             function register (user) {

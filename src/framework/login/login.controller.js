@@ -3,7 +3,7 @@
     'use strict';
 
     angular.module('app.login')
-        .controller('LoginDialogController', ControllerFunction);
+        .controller('LoginController', ControllerFunction);
 
     // ----- ControllerFunction -----
     ControllerFunction.$inject = ['$mdDialog', 'UserService', '$state', '$rootScope'];
@@ -44,6 +44,10 @@
 
         function handleCancel() {
             return $mdDialog.hide();
+        }
+
+        function logout() {
+          console.log('here');
         }
     }
 

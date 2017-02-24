@@ -13,7 +13,7 @@
     /* @ngInject */
     function directiveFunction() {
 
-        var directive = {
+        let directive = {
             restrict: 'E',
             templateUrl: 'components/toolbar/toolbar.html',
             scope: {
@@ -26,20 +26,31 @@
     }
 
     // ----- ControllerFunction -----
-    ControllerFunction.$inject = ['$mdDialog'];
+    ControllerFunction.$inject = ['$mdDialog', 'UserService', '$state'];
 
     /* @ngInject */
-    function ControllerFunction($mdDialog) {
-        var vm = this;
-        vm.login = login;
-
-        function login() {
-            $mdDialog.show({
-                templateUrl: 'components/login/login-dialog.html',
-                controller: 'LoginDialogController',
-                controllerAs: 'vm'
-            });
+    function ControllerFunction($mdDialog, UserService, $state) {
+        let vm  = {
+          openDialog: openDialog,
+          logout: logout
         }
+
+
+        function openDialog() {
+          $mdDialog.show({
+              templateUrl: 'components/toolbar/confirmation.html',
+              controller: 'ToolbarController',
+              controllerAs: 'vm'
+          });
+        }
+
+        function logout() {
+          UserService.logout();
+          $mdDialog.hide();
+          $state.go('login');
+        }
+
+        return vm;
     }
 
 })();
