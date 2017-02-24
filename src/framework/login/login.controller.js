@@ -23,10 +23,10 @@
 
         function signIn(user) {
             UserService.login(user)
-                .then(function(response) {                    
+                .then(function(response) {
                     UserService.setCurrentUser(response.data);
                     $rootScope.$broadcast('authorized');
-                    $state.go('home');
+                    $state.go('private.home');
                 });
         }
 
@@ -43,10 +43,6 @@
 
         function handleCancel() {
             return $mdDialog.hide();
-        }
-
-        function logout() {
-          console.log('here');
         }
     }
 
