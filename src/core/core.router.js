@@ -14,29 +14,31 @@
 
             $urlRouterProvider.otherwise( function($injector) {
               var $state = $injector.get("$state");
-              $state.go('private.home');
+              $state.go('public.login');
             });
 
             $stateProvider
                 .state('private', {
-                    url: '/',
+                    url: '',
                     templateUrl: 'layout/layout.private.html',
-                    abstract: true
-                })
-                .state('public', {
-                    url: '/',
-                    templateUrl: 'layout/layout.public.html',
-                    abstract: true
-                })
-                .state('private.home', {
-                    url: 'dashboard',
-                    template: '<tmpl-home></tmpl-home>',
+                    abstract: true,
+                    controller: 'CoreController',
+                    controllerAs: 'core',
                     data: {
                         permissions: {
                             only: ['ROLE_USER'],
                             redirectTo: 'public.login'
                         }
                     }
+                })
+                .state('public', {
+                    url: '',
+                    templateUrl: 'layout/layout.public.html',
+                    abstract: true
+                })
+                .state('private.home', {
+                    url: '/dashboard',
+                    template: '<tmpl-home></tmpl-home>'
                 })
 
                 .state('private.quickstart', {
@@ -61,7 +63,7 @@
                 })
 
                 .state('public.login', {
-                    url: 'login',
+                    url: '/login',
                     templateUrl: 'src/framework/login/login.html',
                     controller: 'LoginController',
                     controllerAs:'vm',

@@ -3,6 +3,12 @@
 
     angular
         .module('app.core')
+
+        /**
+        * @ngdoc constant
+        * @description define endpont's based constants
+        * needs to be overriden when this app is setted up
+        */
         .constant('ENDPOINT_URI', 'http://sf3.local/')
         .constant('api', 'http://localhost:7273/api');
 })();

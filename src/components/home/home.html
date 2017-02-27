@@ -1,26 +1,25 @@
-  <md-button md-no-ink class="md-raised md-primary md-button md-ink-ripple" href="/post/new">New Post</md-button>
-  <div class='md-padding' layout="row" flex>
-    <div layout="row" flex>
-      <div class="parent" layout="column" ng-repeat="post in vm.posts" flex>
-        <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
-          <md-card-title>
-            <md-card-title-text>
-              <span class="md-headline">{{post.title}}</span>
-            </md-card-title-text>
-          </md-card-title>
-          <md-card-content>
-            <p>{{post.content}}</p>
-
-            <div ng-repeat="comment in post.comments">
-              <h3>Comments</h3>
-              {{comment.content}}
-            </div>
-          </md-card-content>
-          <md-card-actions layout="row" layout-align="end center">
-            <md-button href="/post/edit/{{post.id}}">Edit</md-button>
-            <md-button ng-click="vm.showDialog(post)">Delete</md-button>
-          </md-card-actions>
-        </md-card>
+<md-button md-no-ink class="md-raised md-primary md-button md-ink-ripple" href="/post/new">New Post</md-button>
+<div class='md-padding' layout="row" flex>
+  <div layout="row" flex layout-wrap>
+    <div class="parent" layout="column" ng-repeat="post in vm.posts" flex="33">
+      <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">{{post.title}}</span>
+          </md-card-title-text>
+        </md-card-title>
+        <md-card-content>
+          <p>{{post.content}}</p>
+          <div ng-repeat="comment in post.comments">
+            <h3>Comments</h3>
+            {{comment.content}}
+          </div>
+        </md-card-content>
+        <md-card-actions layout="row" layout-align="end center">
+          <md-button ui-sref="private.edit({id: post.id})">Edit</md-button>
+          <md-button ng-click="vm.showDialog(post)">Delete</md-button>
+        </md-card-actions>
+      </md-card>
     </div>
   </div>
 </div>

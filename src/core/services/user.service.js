@@ -6,9 +6,9 @@
         .module('app.core')
         .service('UserService', UserService)
 
-        UserService.$inject = ['$http', 'store', 'PermRoleStore', 'ENDPOINT_URI'];
+        UserService.$inject = ['$http', 'store', 'ENDPOINT_URI'];
 
-        function UserService ($http, store, PermRoleStore, ENDPOINT_URI) {
+        function UserService ($http, store, ENDPOINT_URI) {
 
             // service declaration
             let service = this;
@@ -26,6 +26,7 @@
             service.logout = logout;
             service.register = register;
             service.setCurrentUser = setCurrentUser;
+            service.refresh = refresh;
 
             // public methods implementation
             function getCurrentUser () {
@@ -41,8 +42,14 @@
                 dataUser.accessToken = response.token;
                 dataUser.refreshToken = response.refresh_token;
 
+                currentUser = dataUser;
+                
                 store.set('user', dataUser);
                 return dataUser;
+            }
+
+            function refresh (credentials) {
+                return $http.post(_getLogUrl('refresh'), credentials);
             }
 
             function login (credentials) {

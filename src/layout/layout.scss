@@ -1,5 +1,53 @@
 /* -----------------------------------------------------------------------------
- * approot.scss
+ * layout.scss
  * -------------------------------------------------------------------------- */
 
-// Put component specific styles here
+// Put layout styles here
+[layout-wrap] {
+-webkit-flex-wrap: wrap;
+-ms-flex-wrap: wrap;
+flex-wrap: wrap;
+}
+
+.table-fixed {
+  border-collapse: collapse;
+}
+
+.table-fixed tr {
+  display: flex;
+}
+
+.table-fixed td {
+  flex: 1;
+}
+
+.table-fixed thead th {
+  display: block;
+  flex: 1;
+}
+
+.table-fixed tbody {
+  display: block;
+  overflow-y: auto;
+  height: calc(80vh - 10px);
+}
+
+.table-fixed tbody tr > td:last-child,
+.table-fixed thead > th:last-child {
+  width: 250px;
+}
+
+.table-fixed thead tr:after {
+  overflow-y: scroll;
+  visibility: hidden;
+  height: 0;
+}
+
+.table-fixed th, td {
+  min-width: 100px;
+}
+
+.table-fixed th:last-child,
+.table-fixed tr > td:last-child {
+  min-width: 250px;
+}

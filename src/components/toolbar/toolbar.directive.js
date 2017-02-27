@@ -48,7 +48,7 @@
         function logout() {
           UserService.logout();
           $mdDialog.hide();
-          $state.go('login');
+          $state.go('public.login');
         }
 
         function hideDialog() {

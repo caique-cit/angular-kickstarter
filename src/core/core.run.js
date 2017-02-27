@@ -18,7 +18,7 @@
 
                 if (currentUser) {
                     isPermited = currentUser.roles.indexOf(roleName) > -1;
-                } 
+                }
 
                 return isPermited;
             }

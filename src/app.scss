@@ -1,7 +1,12 @@
-@import "core/styles/variables";
+// Import Core Styles
+@import "core/**/*.scss";
 
-@import "core/styles/core";
+// Import Framework (same meaning of utilites, renamed to make sense with Angular app)
+// varibles and mixins
+@import "framework/**/*.scss";
 
-@import "core/styles/forms";
+// Import Layout styles
+@import "layout/**/*.scss";
 
-@import "layout/layout";
+// Import Components styles
+@import "components/**/*.scss";
