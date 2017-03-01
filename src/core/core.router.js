@@ -14,7 +14,7 @@
 
             $urlRouterProvider.otherwise( function($injector) {
               var $state = $injector.get("$state");
-              $state.go('public.login');
+              $state.go('public.welcome');
             });
 
             $stateProvider
@@ -64,7 +64,7 @@
 
                 .state('public.login', {
                     url: '/login',
-                    templateUrl: 'src/framework/login/login.html',
+                    templateUrl: 'src/components/login/login.html',
                     controller: 'LoginController',
                     controllerAs:'vm',
                     data: {
@@ -73,6 +73,10 @@
                             redirectTo: 'private.home'
                         }
                     }
+                })
+                .state('public.welcome', {
+                    url: '/welcome',
+                    templateUrl: 'src/components/landingpage/index.html'
                 })
 
 

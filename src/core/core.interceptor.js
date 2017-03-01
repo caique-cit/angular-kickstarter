@@ -3,7 +3,7 @@
 
     angular
         .module('app.core')
-        .service('CoreInterceptor', CoreInterceptor)
+        .service('CoreInterceptor', CoreInterceptor);
 
         CoreInterceptor.$inject = ['$rootScope', '$injector'];
 
@@ -57,11 +57,11 @@
             * @return {object} response resultant object from the $http request
             */
             service.responseError = function(response) {
-                if (response.status == 401) {
+                if (response.status === 401) {
                     $rootScope.$emit('unauthorized');
                 }
 
               return response;
-            }
-        };
+          };
+        }
 })();

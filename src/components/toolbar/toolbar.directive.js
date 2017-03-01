@@ -26,16 +26,23 @@
     }
 
     // ----- ControllerFunction -----
-    ControllerFunction.$inject = ['$mdDialog', 'UserService', '$state'];
+    ControllerFunction.$inject = ['$mdDialog', 'UserService', '$state', '$translate', '$scope'];
 
     /* @ngInject */
-    function ControllerFunction($mdDialog, UserService, $state) {
+    function ControllerFunction($mdDialog, UserService, $state, $translate, scope) {
         let vm  = {
           openDialog: openDialog,
           logout: logout,
-          hideDialog: hideDialog
-        }
+          hideDialog: hideDialog,
+          languages: {'PT':'pt','EN':'en'}
 
+        };
+
+        scope.$watch('vm.language', function() {
+            $translate.use(vm.language);
+        });
+
+        vm.language = $translate.proposedLanguage() || $translate.use();
 
         function openDialog() {
           $mdDialog.show({

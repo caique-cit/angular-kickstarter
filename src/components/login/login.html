@@ -5,11 +5,11 @@
 
       <md-content md-theme="docs-dark" layout-gt-sm="row" layout-padding>
         <md-input-container class="md-block">
-          <label>Username:</label>
+          <label>{{'USERNAME' | translate }}:</label>
           <input ng-model="vm.username" required>
         </md-input-container>
         <md-input-container class="md-block">
-          <label>Password:</label>
+          <label>{{'PASSWORD' | translate }}:</label>
           <input ng-model="vm.password" type="password" required>
         </md-input-container>
         </md-content>
@@ -17,7 +17,7 @@
           <md-button type="submit" class="md-raised md-primary md-button md-ink-ripple"
                      ng-class="{'md-raised md-hue-1': (loginForm.$dirty && loginForm.$valid) }"
                      aria-label="OK">
-                  OK
+                  {{'LOGIN' | translate }}
           </md-button>
           <md-button type="button" ng-click="vm.handleCancel(); $event.stopPropagation();"
                      aria-label="Cancel">

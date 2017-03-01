@@ -1,10 +1,12 @@
 <md-toolbar>
     <div class="md-toolbar-tools">
-        <h1>Angular Template</h1>
+        <h1>{{ 'TOOLBAR.NAME' | translate}}</h1>
         <span flex></span>
-        <md-button class="md-icon-button" aria-label="Refresh">
-            <md-icon md-svg-icon="navigation:refresh"></md-icon>
-        </md-button>
-        <md-button ng-click="vm.openDialog()" class="md-raised md-primary md-hue-2">Logout</md-button>        
+
+        <md-select ng-model="vm.language" aria-label="Languges">
+            <md-option ng-value="value" ng-repeat="(key, value) in vm.languages">{{ key }}</md-option>
+          </md-select>
+
+        <md-button ng-click="vm.openDialog()" class="md-raised md-primary md-hue-2">Logout</md-button>
     </div>
 </md-toolbar>

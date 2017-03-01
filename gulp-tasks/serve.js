@@ -45,7 +45,7 @@ module.exports = function (config) {
             },
             ghostMode: {
                 clicks: true,
-                location: false,
+                location: true,
                 forms: true,
                 scroll: true
             },
