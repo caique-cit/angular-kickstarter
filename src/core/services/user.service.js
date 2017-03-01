@@ -4,9 +4,9 @@
 
     angular
         .module('app.core')
-        .service('UserService', UserService)
+        .service('UserService', UserService);
 
-        UserService.$inject = ['$http', 'store', 'ENDPOINT_URI'];
+        UserService.$inject = ['$http', 'CoreStore', 'ENDPOINT_URI'];
 
         function UserService ($http, store, ENDPOINT_URI) {
 
@@ -43,7 +43,7 @@
                 dataUser.refreshToken = response.refresh_token;
 
                 currentUser = dataUser;
-                
+
                 store.set('user', dataUser);
                 return dataUser;
             }
@@ -57,7 +57,7 @@
             }
 
             function logout () {
-                store.remove('user');
+                store.destroy();
             }
 
             function register (user) {

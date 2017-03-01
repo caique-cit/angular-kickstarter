@@ -7,10 +7,10 @@
         .controller('LoginController', ControllerFunction);
 
         // ----- ControllerFunction -----
-        ControllerFunction.$inject = ['$mdDialog', 'UserService', '$state', '$rootScope'];
+        ControllerFunction.$inject = ['$mdDialog', 'UserService', '$state', '$rootScope','$translatePartialLoader'];
 
         /* @ngInject */
-        function ControllerFunction($mdDialog, UserService, $state, $rootScope) {
+        function ControllerFunction($mdDialog, UserService, $state, $rootScope, $translatePartialLoader) {
 
             var vm = this;
             vm.password = null;
@@ -18,7 +18,7 @@
             vm.newUser = false;
             vm.handleCancel = handleCancel;
             vm.handleSubmit = handleSubmit;
-
+            $translatePartialLoader.addPart('login');
 
             function signIn(user) {
                 UserService.login(user)

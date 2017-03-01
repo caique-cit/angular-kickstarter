@@ -5,7 +5,8 @@
 
     // Application configuration values
     var config = {
-        appErrorPrefix: '[Angular Template Error] '
+        appErrorPrefix: '[Angular Template Error] ',
+        appCacheConfig: 'ciandt.kickstarter'
     };
 
     core.value('config', config);
@@ -19,7 +20,8 @@
         '$mdIconProvider',
         '$mdThemingProvider',
         'exceptionHandlerProvider',
-        '$httpProvider'
+        '$httpProvider',
+        'CacheFactoryProvider'
     ];
 
     /* @ngInject */
@@ -29,7 +31,8 @@
         $mdIconProvider,
         $mdThemingProvider,
         exceptionHandlerProvider,
-        $httpProvider){
+        $httpProvider,
+        CacheFactoryProvider){
 
         // During development, you may want to set debugInfoEnabled to true. This is required for tools like
         // Protractor, Batarang and ng-inspector to work correctly. However do not check in this change.
@@ -73,5 +76,16 @@
 
 
         $httpProvider.interceptors.push('CoreInterceptor');
+
+        var cacheConfig = {
+    		maxAge: (60 * 60 * 1000) * 24, // Items added to this cache expire after 1 hour.
+    		cacheFlushInterval: (60 * 60 * 1000) * 24, // This cache will clear itself every hour.
+    		deleteOnExpire: 'aggressive', // Items will be deleted from this cache right when they expire.
+    		storageMode: 'localStorage', // localStorage, sessionStorage or memory
+            storagePrefix: 'ciandt_app_cache_'
+		};
+
+		angular.extend(CacheFactoryProvider.defaults, cacheConfig);
+
     }
 })();

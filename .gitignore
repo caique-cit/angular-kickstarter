@@ -9,8 +9,8 @@ obj
 
 # Ignore Node, Bower & Sass
 ###################
-node_modules
 bower_components
+node_modules
 build
 .sass-cache
 .tmp
@@ -71,4 +71,3 @@ journal
 ehthumbs.db
 Icon?
 Thumbs.db
-

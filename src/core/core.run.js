@@ -3,16 +3,20 @@
 
     angular
         .module('app.core')
-        .run(defineSystemRoles)
+        .run(defineSystemInicialization);
 
-        defineSystemRoles.$inject = ['PermRoleStore', 'store'];
+        defineSystemInicialization.$inject = ['PermRoleStore', 'CoreStore','$rootScope','$translate'];
 
-        function defineSystemRoles (PermRoleStore, store) {
+        function defineSystemInicialization (PermRoleStore, store, $rootScope, $translate) {
 
+
+            $rootScope.$on('$translatePartialLoaderStructureChanged', function () {
+               $translate.refresh();
+            });
             PermRoleStore.defineRole('ROLE_ADMIN', _checkRoles);
             PermRoleStore.defineRole('ROLE_USER', _checkRoles);
 
-            function _checkRoles (roleName, transitionProperties) {
+            function _checkRoles (roleName) {
                 let currentUser = store.get('user');
                 let isPermited = false;
 
