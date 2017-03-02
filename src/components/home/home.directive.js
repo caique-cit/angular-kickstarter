@@ -38,6 +38,7 @@
         vm.posts = [];
         vm.post = {};
         vm.pager = {};
+        vm.isLoading = false;
         vm.pager.itemsPerPage = '12';
 
 
@@ -47,12 +48,14 @@
 
         vm.getPosts = function (page) {
             let currentPage = page || 1;
+            vm.isLoading = true;
 
             PostService.getPosts(currentPage, vm.pager.itemsPerPage).then(function(response) {
                 if (response && response.data) {
                     vm.posts = response.data.posts;
                     vm.pager.totalOfPager = response.data.meta.pagination.total_pages;
                     vm.pager.currentPage = response.data.meta.pagination.current_page;
+                    vm.isLoading = false;
                 }
             });
         }
