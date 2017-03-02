@@ -1,4 +1,4 @@
-(function () {
+  (function () {
     'use strict';
 
     angular
@@ -77,6 +77,13 @@
                 .state('public.welcome', {
                     url: '/welcome',
                     templateUrl: 'src/components/landingpage/index.html'
+                })
+
+                .state('private.postList', {
+                    url: '/post/list',
+                    templateUrl: 'src/components/post/post-table/post-table.html',
+                    controller:  'PostListController',
+                    controllerAs:'vm'
                 })
 
 

@@ -48,7 +48,7 @@
             HomeService.getPosts().then(function(response) {
                 if (response && response.data) {
                     vm.posts = response.data.posts;
-                }                
+                }
             });
         }
 
