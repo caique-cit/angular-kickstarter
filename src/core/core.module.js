@@ -9,6 +9,9 @@
         'fw.exception', 'fw.logger',
 
         // 3rd Party modules
-        'ui.router', 'permission', 'permission.ui'
+        'ui.router', 'permission', 'permission.ui',
+
+
+        'dataGrid', 'pagination', 'ui.bootstrap'
     ]);
 })();

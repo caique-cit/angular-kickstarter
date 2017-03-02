@@ -41,12 +41,9 @@
         vm.pager.itemsPerPage = '12';
 
 
-
         $rootScope.$on('post_update', function(event, data) {
             activate();
         });
-
-
 
         vm.getPosts = function (page) {
             let currentPage = page || 1;
