@@ -28,27 +28,35 @@
 
 
     // ----- ControllerFunction -----
-    ControllerFunction.$inject = ['logger','HomeService','$mdDialog', '$rootScope'];
+    ControllerFunction.$inject = ['logger','HomeService','$mdDialog', '$rootScope', 'PostService'];
 
     /* @ngInject */
-    function ControllerFunction(logger, HomeService, $mdDialog, $rootScope) {
+    function ControllerFunction(logger, HomeService, $mdDialog, $rootScope, PostService) {
+
         var vm = this;
+
         vm.posts = [];
         vm.post = {};
+        vm.pager = {};
+        vm.pager.itemsPerPage = '12';
 
-        activate();
+
 
         $rootScope.$on('post_update', function(event, data) {
             activate();
         });
 
-        function activate() {
-            logger.log('Activated Home View');
 
-            HomeService.getPosts().then(function(response) {
+
+        vm.getPosts = function (page) {
+            let currentPage = page || 1;
+
+            PostService.getPosts(currentPage, vm.pager.itemsPerPage).then(function(response) {
                 if (response && response.data) {
                     vm.posts = response.data.posts;
-                }                
+                    vm.pager.totalOfPager = response.data.meta.pagination.total_pages;
+                    vm.pager.currentPage = response.data.meta.pagination.current_page;
+                }
             });
         }
 
@@ -63,6 +71,12 @@
                 }
             });
         }
+
+        function _init() {
+            vm.getPosts(1);
+        }
+
+        _init();
     }
 
     // ----- DeleteFunction -----

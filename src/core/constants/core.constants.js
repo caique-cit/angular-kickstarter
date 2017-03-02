@@ -8,5 +8,6 @@
         * @ngdoc constant
         * @description defines all app global scope constants
         */
-        .constant('REFRESH_TOKEN_AUTO', true);
+        .constant('REFRESH_TOKEN_AUTO', true)
+        .constant('ENABLE_SECURITY', true);
 })();

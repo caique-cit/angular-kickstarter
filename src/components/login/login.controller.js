@@ -7,10 +7,10 @@
         .controller('LoginController', ControllerFunction);
 
         // ----- ControllerFunction -----
-        ControllerFunction.$inject = ['$mdDialog', 'UserService', '$state', '$rootScope','$translatePartialLoader'];
+        ControllerFunction.$inject = ['$mdDialog', 'CoreUserService', '$state', '$rootScope','$translatePartialLoader'];
 
         /* @ngInject */
-        function ControllerFunction($mdDialog, UserService, $state, $rootScope, $translatePartialLoader) {
+        function ControllerFunction($mdDialog, CoreUserService, $state, $rootScope, $translatePartialLoader) {
 
             var vm = this;
             vm.password = null;
@@ -21,16 +21,16 @@
             $translatePartialLoader.addPart('login');
 
             function signIn(user) {
-                UserService.login(user)
+                CoreUserService.login(user)
                     .then(function(response) {
-                        UserService.setCurrentUser(response.data);
+                        CoreUserService.setCurrentUser(response.data);
                         $rootScope.$broadcast('authorized');
                         $state.go('private.home');
                     });
             }
 
             function register(user) {
-                UserService.register(user)
+                CoreUserService.register(user)
                     .then(function(response) {
                         login(user)
                     });

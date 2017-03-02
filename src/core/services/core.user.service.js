@@ -4,11 +4,11 @@
 
     angular
         .module('app.core')
-        .service('UserService', UserService);
+        .service('CoreUserService', CoreUserService);
 
-        UserService.$inject = ['$http', 'CoreStore', 'ENDPOINT_URI'];
+        CoreUserService.$inject = ['$http', 'CoreStore', 'ENDPOINT_URI'];
 
-        function UserService ($http, store, ENDPOINT_URI) {
+        function CoreUserService ($http, store, ENDPOINT_URI) {
 
             // service declaration
             let service = this;
@@ -39,8 +39,10 @@
             function setCurrentUser (response) {
                 let dataUser = response.user;
 
-                dataUser.accessToken = response.token;
-                dataUser.refreshToken = response.refresh_token;
+                if (response.token && response.refresh_token) {
+                    dataUser.accessToken = response.token;
+                    dataUser.refreshToken = response.refresh_token;
+                }
 
                 currentUser = dataUser;
 

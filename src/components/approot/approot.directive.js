@@ -5,10 +5,10 @@
     angular.module('app.approot')
         .directive('tmplApproot', directiveFunction);
 
-    directiveFunction.$inject = ['UserService'];
+    directiveFunction.$inject = ['CoreUserService'];
 
     // ----- directiveFunction -----
-    function directiveFunction(UserService) {
+    function directiveFunction(CoreUserService) {
 
         var directive = {
             restrict: 'E',
@@ -16,7 +16,7 @@
             scope: {
             },
             link: function(scope) {
-              scope.isLogin = UserService.getCurrentUser() ? true : false;
+              scope.isLogin = CoreUserService.getCurrentUser() ? true : false;
             }
         };
 

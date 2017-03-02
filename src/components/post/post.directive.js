@@ -23,9 +23,9 @@
             return directive;
         }
 
-        ControllerFunction.$inject = ['PostService', '$location', '$scope', '$stateParams'];
+        ControllerFunction.$inject = ['PostService', '$state', '$location', '$scope', '$stateParams'];
 
-        function ControllerFunction(PostService, $location, $scope, $stateParams) {
+        function ControllerFunction(PostService, $state, $location, $scope, $stateParams) {
             let vm = {
                 post: {}
             }
@@ -54,14 +54,14 @@
                     PostService.updatePost(post).then(function(){
 
                     }).finally(function() {
-                        $location.path('/');
+                        $state.go('private.home');
                     });
 
                 } else {
                     PostService.addPosts(vm.post).then(function() {
 
                     }).finally(function() {
-                        $location.path('/');
+                        $state.go('private.home');
                     });
                 }
             };

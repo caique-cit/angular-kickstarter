@@ -1,0 +1,16 @@
+.pager-container {
+    text-align: center;
+
+    .md-button {
+        display: inline-block;
+
+        .material-icons {
+            position: relative;
+            top: 6px;
+        }
+    }
+
+    .pager-text {
+        display: inline-block;
+    }
+}

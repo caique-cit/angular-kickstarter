@@ -5,7 +5,7 @@
         .module('app.core')
         .controller('CoreController', CoreController);
 
-        CoreController.$inject = ['$rootScope', 'UserService', 'REFRESH_TOKEN_AUTO'];
+        CoreController.$inject = ['$rootScope', 'CoreUserService', 'REFRESH_TOKEN_AUTO', 'ENABLE_SECURITY'];
 
         /**
         * @ngdoc controller
@@ -14,10 +14,11 @@
         * it controls global scope features like user logout.
         * and here will be placed all rootScope event handlers
         * @requires $rootScope
-        * @requires UserService
+        * @requires CoreUserService
         * @requires REFRESH_TOKEN_AUTO
+        * @requires ENABLE_SECURITY
         */
-        function CoreController ($rootScope, UserService, REFRESH_TOKEN_AUTO) {
+        function CoreController ($rootScope, CoreUserService, REFRESH_TOKEN_AUTO, ENABLE_SECURITY) {
             // controller declaration
             var core = this;
 
@@ -29,9 +30,9 @@
 
 
             function logout() {
-                UserService.logout()
+                CoreUserService.logout()
                     .then(function(response) {
-                        core.currentUser = UserService.setCurrentUser(null);
+                        core.currentUser = CoreUserService.setCurrentUser(null);
                     })
                     .catch(function (error) {
                         throw error;
@@ -45,21 +46,21 @@
             * emited by LoginController and set the currentUser info
             */
             $rootScope.$on('authorized', function() {
-                core.currentUser = UserService.getCurrentUser();
+                core.currentUser = CoreUserService.getCurrentUser();
             });
 
             /**
             * @ngdoc function
             * @link g.$rootScope.Scope#methods_$on listen
             * @description this listener listen to the 'unauthorized' event
-            * emited by CoreInterceptor and calls the UserService method
+            * emited by CoreInterceptor and calls the CoreUserService method
             * to refresh current user's auth token
             */
             $rootScope.$on('unauthorized', function() {
-                if (REFRESH_TOKEN_AUTO) {
-                    UserService.refresh({refresh_token: core.currentUser.refreshToken})
+                if (REFRESH_TOKEN_AUTO && ENABLE_SECURITY) {
+                    CoreUserService.refresh({refresh_token: core.currentUser.refreshToken})
                         .then(function (response) {
-                            core.currentUser = UserService.setCurrentUser(response.data);
+                            core.currentUser = CoreUserService.setCurrentUser(response.data);
                         })
                         .catch(function (error) {
                             throw error;

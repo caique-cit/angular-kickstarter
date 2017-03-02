@@ -13,30 +13,30 @@
         * @description intercepts all $http requests to get users access and
         * refresh token.
         * It's also used to check integrity of the token by the API.
-        * It uses UserService to handle current user information and
+        * It uses CoreUserService to handle current user information and
         * the $rootScope to emit events about current user's status
         * @requires $rootScope
-        * @requires UserService
+        * @requires CoreUserService
         * reference: https://docs.angularjs.org/api/ng/service/$http
         */
         function CoreInterceptor($rootScope, $injector) {
 
             // service declaration
             let service = this;
-            let UserService;
+            let CoreUserService;
 
             /**
             * @ngdoc function
             * @name app.core:CoreInterceptor#request
             * @description used to get user's access token from current user
             * and sent it as a 'Bearer' header in any $http request.
-            * It uses as singleton of UserService to get user information.
+            * It uses as singleton of CoreUserService to get user information.
             * @param {object} config request configuration object
             * @return {object} config request configuration object with new bearer header
             */
             service.request = function(config) {
-                UserService = UserService || $injector.get('UserService');
-                let currentUser = UserService.getCurrentUser(),
+                CoreUserService = CoreUserService || $injector.get('CoreUserService');
+                let currentUser = CoreUserService.getCurrentUser(),
                 accessToken = currentUser ? currentUser.accessToken : null;
 
                 if (accessToken) {

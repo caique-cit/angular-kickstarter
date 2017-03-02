@@ -15,8 +15,8 @@
                 return ENDPOINT_URI + path;
             }
 
-            service.getPosts = function() {
-                return $http.get(getUrl());
+            service.getPosts = function(pageNumber, itemsPerPage) {
+                return $http.get(getUrl() + '?page=' + pageNumber + '&perPage=' + itemsPerPage);
             }
 
             service.addPosts = function(post) {

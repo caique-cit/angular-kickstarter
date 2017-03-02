@@ -26,10 +26,10 @@
     }
 
     // ----- ControllerFunction -----
-    ControllerFunction.$inject = ['$mdDialog', 'UserService', '$state', '$translate', '$scope'];
+    ControllerFunction.$inject = ['$mdDialog', 'CoreUserService', '$state', '$translate', '$scope'];
 
     /* @ngInject */
-    function ControllerFunction($mdDialog, UserService, $state, $translate, scope) {
+    function ControllerFunction($mdDialog, CoreUserService, $state, $translate, scope) {
         let vm  = {
           openDialog: openDialog,
           logout: logout,
@@ -53,7 +53,7 @@
         }
 
         function logout() {
-          UserService.logout();
+          CoreUserService.logout();
           $mdDialog.hide();
           $state.go('public.login');
         }

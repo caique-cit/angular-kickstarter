@@ -23,3 +23,20 @@
     </div>
   </div>
 </div>
+<div class="pager-container">
+  <md-button class="md-raised md-fab md-mini md-primary"
+  ng-disabled="vm.pager.currentPage === 1" name="button"
+  ng-click="vm.getPosts(vm.pager.currentPage - 1)">
+  <i class="material-icons">keyboard_arrow_left</i>
+  </md-button>
+  <p class="pager-text">
+    {{vm.pager.currentPage}}
+    <span>of</span>
+    {{vm.pager.totalOfPager}}
+  </p>
+  <md-button class="md-raised md-fab md-mini md-primary"
+  ng-disabled="vm.pager.currentPage === vm.pager.totalOfPager"
+  name="button" ng-click="vm.getPosts(vm.pager.currentPage + 1)">
+    <i class="material-icons">keyboard_arrow_right</i>
+  </md-button>
+</div>
