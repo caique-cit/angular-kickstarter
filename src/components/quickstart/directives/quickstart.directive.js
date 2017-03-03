@@ -15,9 +15,7 @@
 
         var directive = {
             restrict: 'E',
-            templateUrl: 'components/quickstart/quickstart.html',
-            scope: {
-            },
+            templateUrl: 'components/quickstart/directives/quickstart.directive.html',
             controller: 'QuickstartController',
             controllerAs: 'vm'
         };

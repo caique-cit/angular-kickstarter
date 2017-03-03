@@ -5,7 +5,7 @@
         .module('app.core')
         .controller('CoreController', CoreController);
 
-        CoreController.$inject = ['$rootScope', 'CoreUserService', 'REFRESH_TOKEN_AUTO', 'ENABLE_SECURITY'];
+        CoreController.$inject = ['$rootScope', 'CoreUserService', 'CoreStore', 'REFRESH_TOKEN_AUTO', 'ENABLE_SECURITY'];
 
         /**
         * @ngdoc controller
@@ -18,7 +18,7 @@
         * @requires REFRESH_TOKEN_AUTO
         * @requires ENABLE_SECURITY
         */
-        function CoreController ($rootScope, CoreUserService, REFRESH_TOKEN_AUTO, ENABLE_SECURITY) {
+        function CoreController ($rootScope, CoreUserService, CoreStore, REFRESH_TOKEN_AUTO, ENABLE_SECURITY) {
             // controller declaration
             var core = this;
 
@@ -58,7 +58,10 @@
             */
             $rootScope.$on('unauthorized', function() {
                 if (REFRESH_TOKEN_AUTO && ENABLE_SECURITY) {
-                    CoreUserService.refresh({refresh_token: core.currentUser.refreshToken})
+
+                    let currentUser = core.currentUser || CoreStore.get('user');
+
+                    CoreUserService.refresh({refresh_token: currentUser.refreshToken})
                         .then(function (response) {
                             core.currentUser = CoreUserService.setCurrentUser(response.data);
                         })
