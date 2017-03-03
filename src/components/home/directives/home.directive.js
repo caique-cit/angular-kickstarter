@@ -16,7 +16,7 @@
 
         var directive = {
             restrict: 'E',
-            templateUrl: 'components/home/home.html',
+            templateUrl: 'components/home/directives/home.directive.html',
             scope: {
             },
             controller: 'HomeController',

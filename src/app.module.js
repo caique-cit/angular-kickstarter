@@ -6,7 +6,6 @@
         'app.core',
 
         // Features (listed alphabetically)
-        'app.approot',
         'app.home',
         'app.login',
         'app.post',

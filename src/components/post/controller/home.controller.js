@@ -1,27 +1,10 @@
 (function () {
 
     'use strict';
-    angular.module('app.post')
-        .directive('tplPost', directiveFunction)
+
+    angular
+        .module('app.post')
         .controller('PostController', ControllerFunction);
-
-        directiveFunction.$inject = [];
-
-
-        function directiveFunction() {
-
-            var directive = {
-                restrict: 'E',
-                templateUrl: 'components/post/post.html',
-                scope: {
-                },
-                controller: 'PostController',
-                controllerAs: 'vm',
-                bindToController: true,
-            };
-
-            return directive;
-        }
 
         ControllerFunction.$inject = ['PostService', '$state', '$location', '$scope', '$stateParams'];
 
