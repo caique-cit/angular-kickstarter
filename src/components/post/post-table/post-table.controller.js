@@ -4,37 +4,44 @@
     angular.module('app.post')
     .controller('PostListController', ControllerFunction);
 
+    ControllerFunction.$inject = ['PostListService', '$scope'];
 
-    ControllerFunction.$inject = ['HomeService'];
-
-    function ControllerFunction(HomeService) {
+    function ControllerFunction(PostListService, $scope) {
       let vm = this;
+      vm.isLoading = false;
       vm.gridOptions = {
 
-           data: [], //required parameter - array with data
-           //optional parameter - start sort options
-
-           urlSync: true,
-
+           data: [],
            sort: {
                predicate: 'title',
                direction: 'asc'
            }
+      }
 
-      };
+      $scope.paginationOptions = {};
+
+      vm.getPosts = function(currentPage, itemsPerPage) {
+        vm.isLoading = true;
+        PostListService.getPosts(currentPage, itemsPerPage ).then(function(response) {
+            if (response && response.data) {
+              console.log(response);
+                vm.gridOptions.data = response.data.posts;
+                vm.totalItems = response.data.meta.pagination.total;
+                vm.paginationCurrentPage = response.data.meta.pagination.current_page;
+                $scope.paginationOptions.itemsPerPage = response.data.meta.pagination.per_page;
+                vm.isLoading = false;
+
+            }
+        })
+      }
 
       function init() {
-        HomeService.getPosts().then(function(response) {
-            if (response && response.data) {
-                vm.gridOptions.data = response.data.posts;
-                //let data = response.data.some
-                let totalItems = response.data.meta.count;
-            }
-        });
+        vm.getPosts(1, 10);
       };
 
-
       init();
+
+      return vm;
     }
 
 })();

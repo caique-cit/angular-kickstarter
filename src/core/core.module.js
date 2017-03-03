@@ -12,6 +12,6 @@
         'ui.router', 'permission', 'permission.ui',
 
 
-        'dataGrid', 'pagination', 'ui.bootstrap'
+        'dataGrid', 'pagination'
     ]);
 })();

@@ -83,7 +83,13 @@
                     url: '/post/list',
                     templateUrl: 'src/components/post/post-table/post-table.html',
                     controller:  'PostListController',
-                    controllerAs:'vm'
+                    controllerAs: 'vm',
+                    data: {
+                        permissions: {
+                            only: ['ROLE_ADMIN'],
+                            redirectTo: 'private.home'
+                        }
+                    }
                 })
 
 
