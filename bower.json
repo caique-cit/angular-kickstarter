@@ -33,7 +33,8 @@
     "angular-translate-loader-static-files": "^2.15.0",
     "angular-translate-loader-partial": "^2.15.0",
     "angular-data-grid": "*",
-    "angular-bootstrap": "^2.5.0"
+    "angular-bootstrap": "^2.5.0",
+    "angular-md5": "^0.1.10"
   },
   "resolutions": {
     "angular": "~1.6.2"

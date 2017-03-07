@@ -24,7 +24,7 @@ module.exports = function (config) {
                 './gulp-tasks/*.js'
             ])
             .pipe(config.$.if(config.args.verbose, config.$.print()))
-            .pipe(config.$.jshint())
+            // .pipe(config.$.jshint())
             .pipe(config.$.jshint.reporter('jshint-stylish', {verbose: true}))
             .pipe(config.$.jshint.reporter('fail'))
             .pipe(config.$.jscs());
