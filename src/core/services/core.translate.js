@@ -28,10 +28,7 @@
         $translateProvider
             .useStaticFilesLoader({
                 files: [{
-                   prefix: 'src/core/i18n/locale-',
-                   suffix: '.json'
-               }, {
-                   prefix: 'src/components/login/i18n/locale-',
+                   prefix: 'i18n/locale-',
                    suffix: '.json'
                }
                 ]

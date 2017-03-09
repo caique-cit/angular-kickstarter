@@ -25,7 +25,7 @@ module.exports = {
     sass: src + '**/*.scss',
     $: $,
     args: require('yargs').argv,
-
+    languages: ['en', 'pt'],
     // --- Utilities ---
     log: function log(msg) {
         if (typeof(msg) === 'object') {

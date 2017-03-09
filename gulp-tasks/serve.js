@@ -8,10 +8,12 @@ var modRewrite = require('connect-modrewrite');
 module.exports = function (config) {
 
     gulp.task('serve-dev', ['inject'], function () {
+        config.notify('Source code compiled in develop mode.');
         serve(true /*isDev*/);
     });
 
     gulp.task('serve-build', ['build'], function () {
+        config.notify('Source code compiled in production mode.');
         serve(false /*isDev*/);
     });
 

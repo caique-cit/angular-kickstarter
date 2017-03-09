@@ -28,6 +28,7 @@ var gulp = require('gulp'),
     'template-cache',
     'inject',
     'optimize',
+    'translate',
     'test',
     'bump'
 ].forEach(buildTask);

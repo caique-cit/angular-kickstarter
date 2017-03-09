@@ -17,6 +17,14 @@ module.exports = function (config) {
         return clean(config.buildDir + 'fonts/**/*.*');
     });
 
+    gulp.task('clean-translate', function () {
+        var files = [].concat(
+            config.tempDir + 'i18n/**/*.*',
+            config.buildDir + 'i18n/**/*.*'
+        );
+        return clean(files);
+    });
+
     gulp.task('clean-images', function () {
         return clean(config.buildDir + 'images/**/*.*');
     });
@@ -24,8 +32,10 @@ module.exports = function (config) {
     gulp.task('clean-code', function () {
         var files = [].concat(
             config.tempDir + '**/*.js',
+            config.tempDir + '**/*.json',
             config.buildDir + '**/*.js',
-            config.buildDir + '**/*.html'
+            config.buildDir + '**/*.html',
+            config.buildDir + '**/*.json'
         );
 
         return clean(files);

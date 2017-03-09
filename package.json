@@ -1,5 +1,5 @@
 {
-  "name": "angular-material-template",
+  "name": "angular-kick-start",
   "description": "A template to kick-start AngularJS projects using Material design",
   "version": "0.1.0",
   "author": "Naresh Bhatia",
@@ -21,7 +21,8 @@
     "connect-modrewrite": "^0.8.1",
     "cors": "^2.7.1",
     "express": "^4.13.0",
-    "morgan": "^1.6.0"
+    "morgan": "^1.6.0",
+    "uglify-js-harmony": "^2.7.5"
   },
   "devDependencies": {
     "browser-sync": "^2.9.11",
@@ -40,6 +41,7 @@
     "gulp-concat": "^2.6.0",
     "gulp-csso": "^1.0.0",
     "gulp-filter": "^3.0.1",
+    "gulp-foreach": "^0.1.0",
     "gulp-header": "^1.7.1",
     "gulp-if": "^2.0.0",
     "gulp-imagemin": "^2.3.0",
@@ -47,6 +49,7 @@
     "gulp-jscs": "^3.0.1",
     "gulp-jshint": "^1.11.0",
     "gulp-load-plugins": "^1.0.0-rc.1",
+    "gulp-merge-json": "^1.0.0",
     "gulp-minify-html": "^1.0.3",
     "gulp-ng-annotate": "^1.0.0",
     "gulp-nodemon": "^2.0.3",
@@ -58,7 +61,6 @@
     "gulp-sass-glob": "^1.0.8",
     "gulp-sourcemaps": "^1.5.2",
     "gulp-task-listing": "^1.0.1",
-    "gulp-uglify": "^1.4.1",
     "gulp-useref": "^1.2.0",
     "gulp-util": "^3.0.6",
     "gulp-watch": "^4.2.4",
@@ -84,6 +86,7 @@
     "q": "^1.4.1",
     "sinon": "^1.16.1",
     "sinon-chai": "^2.8.0",
+    "uglify-js-es6": "^2.8.9",
     "yargs": "^3.27.0"
   }
 }

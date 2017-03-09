@@ -2,6 +2,8 @@
 
 var gulp = require('gulp');
 var del = require('del');
+var minifier = require('gulp-uglify/minifier');
+var harmony = require('uglify-js-harmony');
 
 module.exports = function (config) {
 
@@ -34,12 +36,12 @@ module.exports = function (config) {
             // Get the custom javascript
             .pipe(jsAppFilter)
             .pipe($.ngAnnotate({ add: true }))
-            .pipe($.uglify())
+            .pipe(minifier({}, harmony))
             .pipe(getHeader())
             .pipe(jsAppFilter.restore)
             // Get the vendor javascript
             .pipe(jslibFilter)
-            .pipe($.uglify())
+            .pipe(minifier({}, harmony))
             .pipe(jslibFilter.restore)
             // Take inventory of the file names for future rev numbers
             .pipe($.rev())

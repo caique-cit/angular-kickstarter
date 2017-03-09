@@ -4,7 +4,7 @@ var gulp = require('gulp');
 
 module.exports = function (config) {
 
-    gulp.task('inject', ['styles', 'templatecache'], function () {
+    gulp.task('inject', ['styles', 'templatecache', 'translate'], function () {
 
         return gulp
             .src(config.sourceDir + 'index.html')

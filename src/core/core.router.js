@@ -31,18 +31,18 @@
                         }
                     }
                 })
-            
+
                 .state('public', {
                     url: '',
                     templateUrl: 'layout/layout.public.html',
                     abstract: true
-                })               
+                })
 
-                
+
                 .state('public.welcome', {
                     url: '/welcome',
-                    templateUrl: 'src/components/landingpage/index.html'
-                })                
+                    templateUrl: 'components/landingpage/index.html'
+                })
 
 
     }
