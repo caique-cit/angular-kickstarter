@@ -8,6 +8,7 @@ var $ = require('gulp-load-plugins')({lazy: true}),
 module.exports = {
 
     // --- Configurables ---
+    name: 'Angular Kic-start',
     sourceDir: src,
     testDir: './test/',
     buildDir: './build/',
@@ -26,6 +27,7 @@ module.exports = {
     $: $,
     args: require('yargs').argv,
     languages: ['en', 'pt'],
+    i18nFolder:'i18n',
     // --- Utilities ---
     log: function log(msg) {
         if (typeof(msg) === 'object') {
@@ -38,8 +40,19 @@ module.exports = {
             $.util.log($.util.colors.blue(msg));
         }
     },
-    notify: function notify(options) {
+    notify: function notify(msg) {
         var notifier = require('node-notifier');
+        var options = {};
+
+        if (typeof msg === 'string') {
+
+            options = {
+                message: msg,
+                title: this.name,
+                sound: true,// Only Notification Center or Windows Toasters
+            };
+        }
+
         notifier.notify(options);
     }
 

@@ -38,12 +38,10 @@
                     abstract: true
                 })
 
-
                 .state('public.welcome', {
                     url: '/welcome',
                     templateUrl: 'components/landingpage/index.html'
-                })
-
+                });
 
     }
 })();

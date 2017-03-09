@@ -20,9 +20,9 @@
     "compression": "^1.6.0",
     "connect-modrewrite": "^0.8.1",
     "cors": "^2.7.1",
+    "event-stream": "^3.3.4",
     "express": "^4.13.0",
-    "morgan": "^1.6.0",
-    "uglify-js-harmony": "^2.7.5"
+    "morgan": "^1.6.0"
   },
   "devDependencies": {
     "browser-sync": "^2.9.11",
@@ -61,6 +61,7 @@
     "gulp-sass-glob": "^1.0.8",
     "gulp-sourcemaps": "^1.5.2",
     "gulp-task-listing": "^1.0.1",
+    "gulp-uglify": "^2.1.0",
     "gulp-useref": "^1.2.0",
     "gulp-util": "^3.0.6",
     "gulp-watch": "^4.2.4",
@@ -87,6 +88,7 @@
     "sinon": "^1.16.1",
     "sinon-chai": "^2.8.0",
     "uglify-js-es6": "^2.8.9",
+    "uglify-js-harmony": "^2.7.5",
     "yargs": "^3.27.0"
   }
 }
