@@ -3,6 +3,6 @@
 
     angular
         .module('app.core')
-        .constant('ENDPOINT_URI', 'http://sf3.local/')
+        .constant('ENDPOINT_URI', '')
         .constant('api', 'http://localhost:7273/api');
 })();

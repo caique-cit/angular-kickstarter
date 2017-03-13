@@ -1,0 +1,40 @@
+<div class="flexbox-parent" flex="50">
+  <div layout="row" layout-align="none center" flex>
+    <form name="registerForm" data-ng-submit="register.handleSubmit(vm)" class="login__container" novalidate flex>
+      <h2 layout="row" layout-align="center center">Cadastro</h2>
+
+      <md-content md-theme="docs-dark" layout-gt-xs="column" layout-padding>
+        <md-input-container aclass="md-block">
+          <label>{{'USERNAME' | translate }}:</label>
+          <input type="email" ng-model="vm.username" required name="username" id="username">
+            <ng-messages for="registerForm.username.$error" role="alert">
+                <!-- div ng-message="already-in-use">This email is already in use by another account.</div -->
+                <ng-message when="email">This isn't a valid email</ng-message>
+              </ng-messages>
+        </md-input-container>
+        <md-input-container>
+          <label>{{'PASSWORD' | translate }}:</label>
+          <input ng-model="vm.password" type="password" name="password" required minlength="6" ng-minlength="6">
+            <div ng-messages="registerForm.password.$error">
+                <div ng-message="minlength">The password needs to have 6 or more characters.</div>
+            </div>
+        </md-input-container>
+        <md-input-container class="md-block">
+          <label>{{'PASSWORD_CONFIRM' | translate }}:</label>
+          <input ng-model="vm.confirmPassword" type="password" required>
+        </md-input-container>
+        </md-content>
+        <div layout="row" layout-align="center center">
+          <md-button type="submit" class="md-raised md-primary md-button md-ink-ripple"
+                     ng-class="{'md-raised md-hue-1': (registerForm.$dirty && registerForm.$valid) }"
+                     aria-label="OK">
+                  {{'SUBMIT' | translate }}
+          </md-button>
+          <md-button type="button" ng-click="vm.handleCancel(); $event.stopPropagation();"
+                     aria-label="Cancel">
+                  Cancel
+          </md-button>
+        </div>
+    </form>
+  </div>
+</div>

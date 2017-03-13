@@ -10,6 +10,7 @@
         'app.login',
         'app.post',
         'app.quickstart',
+        'app.register',
         'app.toolbar'
     ]);
 })();

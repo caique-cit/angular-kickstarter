@@ -30,24 +30,18 @@
 
             // public methods implementation
             function getCurrentUser () {
-              if(!currentUser) {
-                currentUser = store.get('user');
-              }
-              return currentUser;
+                
+                if(!currentUser) {
+                    currentUser = store.get('user');
+                }
+                
+                return currentUser;
             }
 
             function setCurrentUser (response) {
-                let dataUser = response.user;
-
-                if (response.token && response.refresh_token) {
-                    dataUser.accessToken = response.token;
-                    dataUser.refreshToken = response.refresh_token;
-                }
-
-                currentUser = dataUser;
-
-                store.set('user', dataUser);
-                return dataUser;
+                
+                store.set('user', response);
+                return response;
             }
 
             function refresh (credentials) {

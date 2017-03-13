@@ -14,7 +14,7 @@
 
             $urlRouterProvider.otherwise( function($injector) {
               var $state = $injector.get("$state");
-              $state.go('public.welcome');
+              $state.go('public.login');
             });
 
             $stateProvider
@@ -37,11 +37,6 @@
                     templateUrl: 'layout/layout.public.html',
                     abstract: true
                 })
-
-                .state('public.welcome', {
-                    url: '/welcome',
-                    templateUrl: 'components/landingpage/index.html'
-                });
 
     }
 })();

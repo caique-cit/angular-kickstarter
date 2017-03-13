@@ -6,27 +6,63 @@
         .module('app.login')
         .controller('LoginController', ControllerFunction);
 
-        // ----- ControllerFunction -----
-        ControllerFunction.$inject = ['$mdDialog', 'CoreUserService', '$state', '$rootScope','$translatePartialLoader'];
+        ControllerFunction.$inject = [
+            '$mdDialog',
+            '$firebaseAuth',
+            'CoreUserService', 
+            '$state', 
+            '$rootScope',
+            '$translatePartialLoader'
+        ];
 
         /* @ngInject */
-        function ControllerFunction($mdDialog, CoreUserService, $state, $rootScope, $translatePartialLoader) {
+        function ControllerFunction($mdDialog, $firebaseAuth, CoreUserService, $state, $rootScope, $translatePartialLoader) {
 
             var vm = this;
+           
+            var auth = $firebaseAuth();
+            
             vm.password = null;
             vm.username = null;
             vm.newUser = false;
             vm.handleCancel = handleCancel;
             vm.handleSubmit = handleSubmit;
+            vm.fbAuth = fbAuth;
+            vm.gPlusAuth = gPlusAuth;
+            
             $translatePartialLoader.addPart('login');
 
-            function signIn(user) {
-                CoreUserService.login(user)
-                    .then(function(response) {
-                        CoreUserService.setCurrentUser(response.data);
-                        $rootScope.$broadcast('authorized');
-                        $state.go('private.home');
-                    });
+            function signIn(user) {                
+                auth.$signInWithEmailAndPassword(user.username, user.password)
+                .then(function (user) {
+                    CoreUserService.setCurrentUser(user);
+                    $state.go('private.home');
+                })
+                .catch(function (error) {
+                    throw error;
+                });
+            }
+            
+            function fbAuth () {
+                auth.$signInWithPopup('facebook')
+                .then(function (response) {
+                    CoreUserService.setCurrentUser(response.user);
+                    $state.go('private.home');
+                })
+                .catch(function (error) {
+                    throw error;
+                })
+            }
+            
+            function gPlusAuth () {
+                auth.$signInWithPopup('google')
+                .then(function (response) {
+                    CoreUserService.setCurrentUser(response.user);
+                    $state.go('private.home');
+                })
+                .catch(function (error) {
+                    throw error;
+                })
             }
 
             function register(user) {

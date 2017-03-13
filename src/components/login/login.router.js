@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app.quickstart')
+        .module('app.login')
         .config(LoginRouter);
 
         LoginRouter.$inject = ['$stateProvider'];
@@ -12,7 +12,7 @@
             $stateProvider
             .state('public.login', {
                 url: '/login',
-                templateUrl: 'src/components/login/login.html',
+                templateUrl: 'components/login/login.html',
                 controller: 'LoginController',
                 controllerAs:'vm',
                 data: {

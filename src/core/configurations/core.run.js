@@ -13,7 +13,6 @@
                $translate.refresh();
             });
 
-            PermRoleStore.defineRole('ROLE_ADMIN', _checkRoles);
             PermRoleStore.defineRole('ROLE_USER', _checkRoles);
 
             function _checkRoles (roleName) {
@@ -25,7 +24,7 @@
                 }
 
                 if (currentUser) {
-                    isPermited = currentUser.roles.indexOf(roleName) > -1;
+                    isPermited = !currentUser.isAnonymous;
                 }
 
                 return isPermited;
