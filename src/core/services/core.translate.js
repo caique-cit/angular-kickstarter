@@ -18,12 +18,6 @@
         $translateProvider){
 
         $translateProvider.useSanitizeValueStrategy(null);
-        // $translateProvider.useLoader('$translatePartialLoader', {
-        //   urlTemplate: 'src/components/{part}/i18n/{lang}.json'
-        // })
-        //      .fallbackLanguage('en')
-        //      .preferredLanguage('en')
-        //      .forceAsyncReload(true);
 
         $translateProvider
             .useStaticFilesLoader({
@@ -34,8 +28,8 @@
                 ]
 
             })
-            .fallbackLanguage('en')
-            .preferredLanguage('en');
+            .fallbackLanguage('pt')
+            .preferredLanguage('pt');
 
         $translateProvider.useStorage('CoreTranslateCache');
 

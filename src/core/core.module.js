@@ -2,7 +2,7 @@
     'use strict';
 
     angular.module('app.core', [
-        'ngAnimate', 'ngMaterial', 'ngMessages', 'ngSanitize','angular-cache','pascalprecht.translate',
+        'ngAnimate', 'ngMaterial', 'ngMessages', 'ngSanitize', 'angular-cache', 'pascalprecht.translate',
         'firebase',
 
 

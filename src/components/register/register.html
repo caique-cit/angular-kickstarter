@@ -1,36 +1,40 @@
-<div class="flexbox-parent" flex="50">
-  <div layout="row" layout-align="none center" flex>
-    <form name="registerForm" data-ng-submit="register.handleSubmit(vm)" class="login__container" novalidate flex>
-      <h2 layout="row" layout-align="center center">Cadastro</h2>
-
-      <md-content md-theme="docs-dark" layout-gt-xs="column" layout-padding>
-        <md-input-container aclass="md-block">
+<div class="flexbox-parent" >
+  <div layout="row" layout-align="center center">
+    <form name="registerForm" data-ng-submit="register.handleSubmit(register)" class="login__container" novalidate flex="50">
+        <img flex="50" flex-offset="25" class="ssh-logo" src="images/logo-ssh.png" alt="SixSigma Helper" title="logo SixSigma helper" />
+      <h2 layout="row" layout-align="center center">Cadastro de usuário</h2>
+      <md-content layout-gt-xs="column" layout-padding>
+        <md-input-container aclass="md-block" flex>
           <label>{{'USERNAME' | translate }}:</label>
-          <input type="email" ng-model="vm.username" required name="username" id="username">
-            <ng-messages for="registerForm.username.$error" role="alert">
-                <!-- div ng-message="already-in-use">This email is already in use by another account.</div -->
-                <ng-message when="email">This isn't a valid email</ng-message>
-              </ng-messages>
+          <input type="email" ng-model="register.username" required name="username" id="username">
+            <div ng-messages="registerForm.username.$error" role="alert">
+                <div ng-message="alreadyInUse">This email is already in use by another account.</div>
+                <div ng-message="email">This isn't a valid email</div>
+              </div>
         </md-input-container>
         <md-input-container>
           <label>{{'PASSWORD' | translate }}:</label>
-          <input ng-model="vm.password" type="password" name="password" required minlength="6" ng-minlength="6">
+          <input ng-model="register.password" type="password" name="password" required minlength="6" ng-minlength="6">
             <div ng-messages="registerForm.password.$error">
                 <div ng-message="minlength">The password needs to have 6 or more characters.</div>
             </div>
         </md-input-container>
         <md-input-container class="md-block">
           <label>{{'PASSWORD_CONFIRM' | translate }}:</label>
-          <input ng-model="vm.confirmPassword" type="password" required>
+          <input ng-model="register.confirmPassword" type="password" name="confirmPassword" required minlength="6" ng-minlength="6">
+            <div ng-messages="registerForm.confirmPassword.$error">
+                <div ng-message="minlength">The password needs to have 6 or more characters.</div>
+                <div ng-message="passwordMatch">The confirmation must match with the password.</div>
+            </div>
         </md-input-container>
         </md-content>
         <div layout="row" layout-align="center center">
           <md-button type="submit" class="md-raised md-primary md-button md-ink-ripple"
                      ng-class="{'md-raised md-hue-1': (registerForm.$dirty && registerForm.$valid) }"
-                     aria-label="OK">
-                  {{'SUBMIT' | translate }}
+                     aria-label="OK" ng-disabled="registerForm.$invalid">
+                  &nbsp;{{'SUBMIT' | translate }}&nbsp;<i class="material-icons" aria-hidden="true">send</i>&nbsp;
           </md-button>
-          <md-button type="button" ng-click="vm.handleCancel(); $event.stopPropagation();"
+          <md-button type="button" ng-click="register.handleCancel(); $event.stopPropagation();"
                      aria-label="Cancel">
                   Cancel
           </md-button>

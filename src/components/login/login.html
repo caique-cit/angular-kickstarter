@@ -1,14 +1,14 @@
 <div class="flexbox-parent">
   <div layout="row" layout-align="center center">
     <form name="loginForm" data-ng-submit="vm.handleSubmit(vm)" class="login__container">
-      <h2 layout="row" layout-align="center center">Login</h2>
+      <h1 layout="row" layout-align="center center"><img class="ssh-logo" src="images/logo-ssh.png" alt="Six Sigma Helper" title="logo six sigma helper"/></h1>
 
-      <md-content md-theme="docs-dark" layout-gt-sm="row" layout-padding>
-        <md-input-container class="md-block">
+      <md-content layout="column" layout-padding>
+        <md-input-container class="md-block" flex>
           <label>{{'USERNAME' | translate }}:</label>
           <input ng-model="vm.username" required>
         </md-input-container>
-        <md-input-container class="md-block">
+        <md-input-container class="md-block" flex>
           <label>{{'PASSWORD' | translate }}:</label>
           <input ng-model="vm.password" type="password" required>
         </md-input-container>
@@ -17,21 +17,38 @@
           <md-button type="submit" class="md-raised md-primary md-button md-ink-ripple"
                      ng-class="{'md-raised md-hue-1': (loginForm.$dirty && loginForm.$valid) }"
                      aria-label="OK">
-                  {{'LOGIN' | translate }}
+                  &nbsp;{{'LOGIN' | translate }}&nbsp;<i class="material-icons" aria-hidden="true">send</i>&nbsp;
           </md-button>
           <md-button type="button" ng-click="vm.handleCancel(); $event.stopPropagation();"
                      aria-label="Cancel">
-                  Cancel
+                  {{'CANCEL' | translate }}
           </md-button>
         </div>
-        <div layout="row">
+        <div layout="column" layout-padding layout-align="center center">
+            <p>
+                Ainda não possui uma conta?
+                <a ui-sref="public.register">Clique aqui</a> e faça um cadastro rápido.
+            </p>
+            <p>
+                Ou entre com suas redes sociais clicando nos botões abaixo.
+            </p>
+        </div>
+        <div layout="row" layout-align="center center">
             <md-button type="submit" ng-click="vm.fbAuth()" class="md-raised md-primary md-button md-ink-ripple"                    
                      aria-label="OK">
-                  Facebookson
+                &nbsp;
+                <i class="fa fa-facebook" aria-hidden="true"></i>
+                &nbsp;
+                Facebook
+                &nbsp;
           </md-button>
-            <md-button type="submit" ng-click="vm.gPlusAuth()" class="md-raised md-primary md-button md-ink-ripple"                    
+            <md-button type="submit" ng-click="vm.gPlusAuth()" class="md-raised md-accent md-button md-ink-ripple"                    
                      aria-label="OK">
-                  Gogre
+                &nbsp;
+                <i class="fa fa-google-plus" aria-hidden="true"></i>
+                &nbsp;
+                Google+
+                &nbsp;
           </md-button>
         </div>
     </form>
