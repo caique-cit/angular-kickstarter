@@ -4,6 +4,10 @@
 
 // Note: Don't put component styles here. Put them in the appropriate component folder.
 
+* {
+    box-sizing: border-box;
+}
+
 ul {
   margin: 10px 0 0 0;
   padding: 0 0 0 20px;

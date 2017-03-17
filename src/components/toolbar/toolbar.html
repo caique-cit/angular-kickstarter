@@ -1,12 +1,9 @@
 <md-toolbar>
     <div class="md-toolbar-tools">
+        <md-button class="md-icon-button md-primary" aria-label="Settings" ng-click="vm.core.toggleLeft()">
+            <md-icon>menu</md-icon>
+        </md-button>
         <h1>{{ 'TOOLBAR.NAME' | translate}}</h1>
         <span flex></span>
-
-        <md-select ng-model="vm.language" aria-label="Languges">
-            <md-option ng-value="value" ng-repeat="(key, value) in vm.languages">{{ key }}</md-option>
-          </md-select>
-
-        <md-button ng-click="vm.openDialog()" class="md-raised md-primary md-hue-2">Logout</md-button>
     </div>
 </md-toolbar>

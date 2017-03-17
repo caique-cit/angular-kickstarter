@@ -2,8 +2,5 @@
     "USERNAME": "Usuário",
     "PASSWORD": "Senha",
     "LOGIN": "Entrar",
-    "CANCEL": "Cancelar",
-    "TOOLBAR": {
-        "NAME": "Começando com AngularJS"
-    }
+    "CANCEL": "Cancelar"
 }

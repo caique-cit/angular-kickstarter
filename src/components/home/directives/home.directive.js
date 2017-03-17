@@ -16,7 +16,7 @@
                 restrict: 'E',
                 templateUrl: 'components/home/directives/home.directive.html',
                 controller: 'HomeController',
-                controllerAs: 'vm'
+                controllerAs: 'home'
             };
 
             return directive;

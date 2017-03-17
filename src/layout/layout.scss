@@ -60,11 +60,18 @@ button {
     }
 }
 
+md-icon {
+    color: $main-bg-color !important;
+    &.inverted {
+        color: #000 !important;
+    }
+}
+
 // Public view styles definition
 
 .public-view {
     background: url('../images/login-bg.jpg');
-    
+
     md-content {
         background: transparent;
     }
@@ -76,4 +83,40 @@ form {
     background: $main-bg-color;
 }
 
+// sidebar styles
 
+.sidebar-header {
+    background: url('../images/lateral_bar_bg.jpg');
+    box-shadow: 1px 3px 4px #888;
+
+    .profile-image-container img {
+        width: 100%;
+        border-radius: 50%;
+        border: 4px solid $main-bg-color;
+    }
+
+    .welcome-message {
+        color: $main-bg-color;
+        font-size: 18px;
+        text-shadow: 1px 1px 3px #000;
+        span {
+            font-size: 12px;
+        }
+    }
+}
+
+.sidebar-menu {
+    a {
+        color: #000;
+        font-size: 18px;
+        text-decoration: none;
+
+        &:hover {
+            opacity: .5;
+        }
+
+        md-icon {
+            font-size: 18px;
+        }
+    }
+}

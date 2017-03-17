@@ -1,0 +1,41 @@
+.project-details-header {
+    background-color: #56718C;
+    background-image: url('../images/header-bg.jpg');//#6ea6dd;
+    background-position: right;
+    background-repeat: no-repeat;
+    width: calc(100% + 46px);
+    min-height: 200px;
+    margin: -30px;
+    box-shadow: 0 3px 4px #666;
+
+    .header-container {
+        margin: 0 40px;
+        padding-top: 30px;
+
+        h2 {
+            color: white;
+            margin-top: 0;
+            font-weight: lighter;
+            text-shadow: 2px 2px 6px #000;
+        }
+
+        h4 {
+            color: white;
+            margin-bottom: 0;
+            text-shadow: 2px 2px 6px #000;
+
+            &:last-child {
+                margin-top: 10px;
+                margin-bottom: 30px;
+            }
+        }
+    }
+
+    .md-button {
+        color: white !important;
+    }
+}
+
+.project-roadmap {
+    margin-top: 40px;
+}

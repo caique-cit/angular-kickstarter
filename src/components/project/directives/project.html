@@ -1,0 +1,35 @@
+<md-content layout-padding>
+    <h2>Novo Projeto</h2>
+    <md-card flex-gt-xs="50" layout-padding class="form-card">
+        <form name="projectForm" data-ng-submit="vm.addProject(vm.project)" novalidate flex>
+        <div layout="column">
+            <md-input-container>
+              <label>Nome</label>
+              <input name="title" ng-model="vm.project.name" ng-minlength="3" required autocomplete="off">
+              <div ng-messages="projectForm.title.$error">
+                  <div ng-message="minlength">
+                      O nome do projeto deve ter pelo menos 3 caracteres
+                  </div>
+              </div>
+            </md-input-container>
+
+            <md-datepicker ng-model="vm.project.startDate" md-placeholder="Data Inicial" required></md-datepicker>
+
+            <md-datepicker ng-model="vm.project.endDate" md-placeholder="Data Final" required></md-datepicker>
+
+            <md-input-container>
+                  <label>Notes</label>
+                  <input type="text" ng-model="vm.project.notes" md-maxlength="250">
+            </md-input-container>
+        </div>
+        <div layout="row">
+            <md-button type="submit" class="md-primary md-raised"
+              ng-disabled="projectForm.$invalid"
+              aria-label="Criar">
+                Criar
+            </md-button>
+            <md-button md-no-ink class="md-primary" ui-sref="private.home">Cancelar</md-button>
+        </div>
+        </form>
+    </md-card>
+</md-content>

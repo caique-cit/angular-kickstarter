@@ -1,0 +1,29 @@
+.form-card {
+    background: lightblue;
+
+    form {
+        background: transparent;
+    }
+
+    label {
+        color: #666;
+        border-color: #666;
+    }
+}
+
+md-datepicker {
+    background: transparent;
+    .md-datepicker-input-container {
+        border-color: #99bfcb;
+    }
+
+    input {
+        &::-webkit-input-placeholder {
+            color: #666;
+        }
+    }
+}
+
+md-icon.md-datepicker-calendar-icon {
+    color: #666 !important;
+}

@@ -2,8 +2,5 @@
     "USERNAME": "Username",
     "PASSWORD": "Password",
     "LOGIN": "Login",
-    "CANCEL": "Cancel",
-    "TOOLBAR": {
-        "NAME": "Angular kick starter."
-    }
+    "CANCEL": "Cancel"
 }

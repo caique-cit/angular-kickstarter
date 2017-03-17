@@ -8,7 +8,7 @@
         // Features (listed alphabetically)
         'app.home',
         'app.login',
-        'app.post',
+        'app.project',
         'app.quickstart',
         'app.register',
         'app.toolbar'

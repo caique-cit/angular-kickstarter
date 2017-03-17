@@ -6,15 +6,15 @@
         .module('app.home')
         .controller('HomeController', HomeController);
 
-        HomeController.$inject = ['logger','HomeService','$mdDialog', '$rootScope', 'PostService'];
+        HomeController.$inject = ['logger','HomeService','$mdDialog', '$rootScope', 'ProjectService', 'CoreUserService', '$scope'];
 
-        function HomeController (logger, HomeService, $mdDialog, $rootScope, PostService) {
+        function HomeController (logger, HomeService, $mdDialog, $rootScope, ProjectService, CoreUserService, $scope) {
             var vm = this;
 
-            vm.posts = [];
+            vm.projects = [];
             vm.post = {};
             vm.pager = {};
-            vm.isLoading = false;
+            vm.isLoading = true;
             vm.pager.itemsPerPage = '12';
 
 
@@ -22,18 +22,24 @@
                 activate();
             });
 
-            vm.getPosts = function (page) {
-                let currentPage = page || 1;
-                vm.isLoading = true;
+            function _getProjects () {
+                firebase.database()
+                    .ref('/users/' + CoreUserService.getCurrentUser().uid + '/projects')
+                    .once('value')
+                    .then(function (response) {
 
-                PostService.getPosts(currentPage, vm.pager.itemsPerPage).then(function(response) {
-                    if (response && response.data) {
-                        vm.posts = response.data.posts;
-                        vm.pager.totalOfPager = response.data.meta.pagination.total_pages;
-                        vm.pager.currentPage = response.data.meta.pagination.current_page;
-                        vm.isLoading = false;
-                    }
-                });
+                        let receivedVal = response.val();
+
+                        Object.keys(receivedVal).map((key, val) => {
+                            let newProject = receivedVal[key];
+
+                            newProject.pid = key;
+                            vm.projects.push(newProject);
+                            vm.isLoading = false;
+
+                            $scope.$apply();
+                        })
+                    })
             }
 
             vm.showDialog = function(post) {
@@ -41,15 +47,15 @@
                 $mdDialog.show({
                     templateUrl: 'components/home/delete-dialog.html',
                     controller: 'DeleteController',
-                    controllerAs: 'vm',
+                    controllerAs: 'delete',
                      locals : {
-                        post : post
+                        project : project
                     }
                 });
             }
 
             function _init() {
-                vm.getPosts(1);
+                _getProjects();
             }
 
             _init();

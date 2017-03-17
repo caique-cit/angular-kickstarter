@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    angular.module('app.post', [
+    angular.module('app.project', [
         'app.core'
     ]);
 })();

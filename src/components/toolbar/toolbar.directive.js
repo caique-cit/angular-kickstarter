@@ -17,6 +17,7 @@
             restrict: 'E',
             templateUrl: 'components/toolbar/toolbar.html',
             scope: {
+              coreFn: '='
             },
             controller: 'ToolbarController',
             controllerAs: 'vm'
@@ -34,6 +35,7 @@
           openDialog: openDialog,
           logout: logout,
           hideDialog: hideDialog,
+          core: scope.coreFn,
           languages: {'PT':'pt','EN':'en'}
 
         };

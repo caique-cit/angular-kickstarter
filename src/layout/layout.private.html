@@ -1,12 +1,38 @@
 <section layout="column" flex="100">
-    <tmpl-toolbar></tmpl-toolbar>
+    <tmpl-toolbar core-fn="core"></tmpl-toolbar>
+    <md-sidenav md-component-id="left" class="md-sidenav-left" md-disable-backdrop >
+      <md-content class="sidebar-header" layout-padding layout="row">
+          <div class="profile-image-container" flex="30">
+              <img ng-src="{{core.getCurrentUser().photoURL}}" alt="Foto de perfil do usuário" />
+          </div>
+          <p class="welcome-message" flex="60">
+              <span>Bem vindo:</span>
+              <br>
+              {{core.getCurrentUser().displayName}}
+          </p>
+      </md-content>
 
-    <md-tabs md-border-bottom>
-        <md-tab label="home" ui-sref="private.home" ui-sref-active="selected"></md-tab>
-        <md-tab label="quickstart" ui-sref="private.quickstart" ui-sref-active="selected"></md-tab>
-        <md-tab label="post" ui-sref="private.postList" ui-sref-active="selected"></md-tab>
-    </md-tabs>
+      <nav class="sidebar-menu" layout-padding>
+          <md-list>
+              <md-list-item>
+                  <a ui-sref="private.home"><md-icon class="inverted">dashboard</md-icon> Dashboard</a>
+              </md-list-item>
+              <hr>
+              <md-list-item>
+                  <a ui-sref="private.home"><md-icon class="inverted">add_box</md-icon> Novo Projeto</a>
+              </md-list-item>
+              <md-list-item>
+                  <a ui-sref="private.home"><md-icon class="inverted">apps</md-icon>Calculadora</a>
+              </md-list-item>
+              <hr>
+              <md-list-item>
+                  <a ui-sref="private.home"><md-icon class="inverted">exit_to_app</md-icon>Sair</a>
+              </md-list-item>
+          </md-list>
+      </nav>
 
+    </md-sidenav>
+    
     <md-content flex layout-padding id="content">
         <div ui-view></div>
     </md-content>

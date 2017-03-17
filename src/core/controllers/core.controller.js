@@ -5,7 +5,7 @@
         .module('app.core')
         .controller('CoreController', CoreController);
 
-        CoreController.$inject = ['$rootScope', 'CoreUserService', 'CoreStore', 'REFRESH_TOKEN_AUTO', 'ENABLE_SECURITY'];
+        CoreController.$inject = ['$mdSidenav', '$rootScope', 'CoreUserService', 'CoreStore', 'REFRESH_TOKEN_AUTO', 'ENABLE_SECURITY'];
 
         /**
         * @ngdoc controller
@@ -18,7 +18,7 @@
         * @requires REFRESH_TOKEN_AUTO
         * @requires ENABLE_SECURITY
         */
-        function CoreController ($rootScope, CoreUserService, CoreStore, REFRESH_TOKEN_AUTO, ENABLE_SECURITY) {
+        function CoreController ($mdSidenav, $rootScope, CoreUserService, CoreStore, REFRESH_TOKEN_AUTO, ENABLE_SECURITY) {
             // controller declaration
             var core = this;
 
@@ -27,7 +27,12 @@
 
             // public methods declaration
             core.logout = logout;
+            core.toggleLeft = toggleLeft
+            core.getCurrentUser = getCurrentUser
 
+            function getCurrentUser () {
+                return CoreUserService.getCurrentUser();
+            }
 
             function logout() {
                 CoreUserService.logout()
@@ -37,6 +42,10 @@
                     .catch(function (error) {
                         throw error;
                     })
+            }
+
+            function toggleLeft () {
+                $mdSidenav('left').toggle();
             }
 
             /**

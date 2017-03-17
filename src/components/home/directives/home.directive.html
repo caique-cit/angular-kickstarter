@@ -1,43 +1,36 @@
-<md-button md-no-ink class="md-raised md-primary md-button md-ink-ripple" href="/post/new">New Post</md-button>
-<div class='md-padding' layout="row" flex>
+<md-content class="no-projects-content" ng-if="home.projects.length === 0 && !home.isLoading">
+    <div class="no-project-message">
+        <p>
+            Você ainda não possui nenhum projeto.
+        </p>
+        <p>
+            Clique no botão abaixo para criar seu primeiro projeto
+        </p>
+    </div>
+    <md-button md-no-ink class="md-raised md-primary md-button md-ink-ripple" ui-sref="private.projectAdd">&nbsp;<md-icon class="material-icons">add_box</md-icon>&nbsp;Novo Projeto&nbsp;</md-button>
+</md-content>
+<div class='md-padding' layout="row" flex ng-if="home.projects.length > 0 && !home.isLoading">
   <div layout="row" flex layout-wrap>
-    <md-progress-circular md-diameter="140" md-mode="indeterminate" ng-show="vm.isLoading"></md-progress-circular>
-    <div class="parent" layout="column" ng-repeat="post in vm.posts" flex="33" ng-hide="vm.isLoading">
-      <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
-        <md-card-title>
-          <md-card-title-text>
-            <span class="md-headline">{{post.title}}</span>
-          </md-card-title-text>
-        </md-card-title>
-        <md-card-content>
-          <p>{{post.content}}</p>
-          <div ng-repeat="comment in post.comments">
-            <h3>Comments</h3>
-            {{comment.content}}
-          </div>
-        </md-card-content>
+    <div class="parent" layout="column" ng-repeat="project in home.projects track by $index" flex="33">
+      <md-card md-theme-watch>
+          <a ui-sref="private.projectDetails({id: project.pid})" class="card-link">
+                <md-card-title>
+                  <md-card-title-text>
+                    <span class="md-headline">{{project.name}}</span>
+                  </md-card-title-text>
+                </md-card-title>
+                <md-card-content>
+                  <p>{{project.startDate}}</p>
+                  <p>{{project.endDate}}</p>
+                  <hr>
+                  <p>{{project.notes}}</p>
+                </md-card-content>
+            </a>
         <md-card-actions layout="row" layout-align="end center">
-          <md-button ui-sref="private.edit({id: post.id})">Edit</md-button>
-          <md-button ng-click="vm.showDialog(post)">Delete</md-button>
+          <md-button ui-sref="private.edit({id: project.pid})">Edit</md-button>
+          <md-button ng-click="home.showDialog(project)">Delete</md-button>
         </md-card-actions>
       </md-card>
     </div>
   </div>
-</div>
-<div class="pager-container">
-  <md-button class="md-raised md-fab md-mini md-primary"
-  ng-disabled="vm.pager.currentPage === 1" name="button"
-  ng-click="vm.getPosts(vm.pager.currentPage - 1)">
-  <i class="material-icons">keyboard_arrow_left</i>
-  </md-button>
-  <p class="pager-text">
-    {{vm.pager.currentPage}}
-    <span>of</span>
-    {{vm.pager.totalOfPager}}
-  </p>
-  <md-button class="md-raised md-fab md-mini md-primary"
-  ng-disabled="vm.pager.currentPage === vm.pager.totalOfPager"
-  name="button" ng-click="vm.getPosts(vm.pager.currentPage + 1)">
-    <i class="material-icons">keyboard_arrow_right</i>
-  </md-button>
 </div>
