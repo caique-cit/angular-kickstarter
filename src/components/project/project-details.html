@@ -1,8 +1,8 @@
 <header class="project-details-header">
     <div class="header-container">
-        <h2>Nome do projeto</h2>
-        <h4>data1</h4>
-        <h4>data2</h4>
+        <h2>{{ details.project.name }}</h2>
+        <h4>começou em: {{ details.project.startDate | date:'dd/MM/yyyy' }}</h4>
+        <h4>termina em: {{ details.project.endDate | date:'dd/MM/yyyy' }}</h4>
         <hr>
         <md-button class="md-primary" ui-sref="private.home"&nbsp;><md-icon>arrow_back</md-icon>&nbsp;Voltar&nbsp;</md-button>
     </div>
@@ -14,52 +14,353 @@
               <md-tab label="definir">
                 <md-content class="md-padding">
                   <h1 class="md-display-2">Definir</h1>
-                  <form class="" ng-submit="details.saveInfo(define)" novalidate="" layout="column">
-                      <md-input-container>
-                        <label>Quem é o meu cliente?</label>
-                        <input name="title" ng-model="details.define.client" ng-minlength="3" required autocomplete="off">
-                        <div ng-messages="projectForm.title.$error">
-                            <div ng-message="minlength">
-                                O nome do cliente deve ter pelo menos 3 caracteres
-                            </div>
-                        </div>
-                      </md-input-container>
-                      <md-input-container>
-                        <label>Quem é o dono do processo?</label>
-                        <input name="title" ng-model="details.define.processOwner" ng-minlength="3" required autocomplete="off">
-                        <div ng-messages="projectForm.title.$error">
-                            <div ng-message="minlength">
-                                O campo exige pelo menos 3 caracteres
-                            </div>
-                        </div>
-                      </md-input-container>
+                  <form class="" ng-submit="details.saveInfo(details.define)" name="defineForm" novalidate="" layout="column">
+                      <section layout-gt-xs="row" layout-xs="column" layout-padding>
+                          <md-input-container flex-gt-xs="50">
+                              <label>Quem é o meu cliente?</label>
+                              <input name="client" ng-model="details.define.client" ng-minlength="3" ng-maxlength="50" autocomplete="off">
+                              <div ng-messages="defineForm.client.$error">
+                                  <div ng-message="minlength">
+                                      O nome do cliente deve ter pelo menos 3 caracteres
+                                  </div>
+                                  <div ng-message="maxlength">
+                                      O nome do cliente deve ter no máximo 50 caracteres
+                                  </div>
+                              </div>
+                          </md-input-container>
+                          <md-input-container flex-gt-xs="50">
+                              <label>Quem é o dono do processo?</label>
+                              <input name="processOwner" ng-model="details.define.processOwner" ng-minlength="3" autocomplete="off">
+                              <div ng-messages="defineForm.processOwner.$error">
+                                  <div ng-message="minlength">
+                                      O nome do dono do processo deve ter pelo menos 3 caracteres
+                                  </div>
+                                  <div ng-message="maxlength">
+                                      O nome do dono do processo deve ter no máximo 50 caracteres
+                                  </div>
+                              </div>
+                          </md-input-container>
+                      </section>
+                      <section layout-gt-xs="row" layout-xs="column" layout-padding>
+                          <md-input-container flex>
+                              <label>VOC</label>
+                              <textarea name="voc" ng-model="details.define.voc" ng-minlength="3" autocomplete="off"></textarea>
+                              <div ng-messages="defineForm.voc.$error">
+                                  <div ng-message="minlength">
+                                      O campo exige pelo menos 3 caracteres
+                                  </div>
+                              </div>
+                          </md-input-container>
+                      </section>
+                      <section layout-gt-xs="row" layout-xs="column" layout-padding>
+                          <md-input-container flex>
+                              <label>O que é crítico para o cliente? (CTQ)</label>
+                              <textarea name="ctq" ng-model="details.define.ctq" ng-minlength="3" autocomplete="off"></textarea>
+                              <div ng-messages="defineForm.ctq.$error">
+                                  <div ng-message="minlength">
+                                      O campo exige pelo menos 3 caracteres
+                                  </div>
+                              </div>
+                          </md-input-container>
+                      </section>
+                      <section layout-gt-xs="row" layout-xs="column" layout-padding>
+                          <md-input-container flex="70" md-no-float ng-hide="details.define.jusCtq">
+                              <label>Justificativa de CTQ</label>
+                              <input name="jusCtq" type="file" ng-model="details.define.jusCtq" placeholder="Justificativa de CTQ"  >
+                          </md-input-container>
+                          <md-button class="md-raised md-primary" ng-click="details.saveFile(details.define.jusCtq)">
+                              Enviar
+                          </md-button>
+                      </section>
+                      <section layout="row" layout-padding>
+                          <md-input-container flex="50">
+                              <label>Qual é o problema?</label>
+                              <input name="problem" ng-model="details.define.problem">
+                          </md-input-container>
+                          <md-input-container flex="50">
+                              <label>Qual é o defeito?</label>
+                              <input name="defect" ng-model="details.define.defect">
+                          </md-input-container>
+                          <md-input-container flex="50">
+                              <label>Nível atual de defeito</label>
+                              <input name="defectLevel" ng-model="details.define.defectLevel">
+                          </md-input-container>
+                      </section>
+                      <section layout="row" layout-padding>
+                          <md-input-container flex="50">
+                              <label>Ganho previsto ($)</label>
+                              <input name="earnings" ng-model="details.define.earnings">
+                          </md-input-container>
+                          <md-input-container flex="50">
+                              <label>Membros da equipe (separados por virgula)</label>
+                              <input name="team" ng-model="details.define.team">
+                          </md-input-container>
+                      </section>
+                      <section layout="row" layout-padding>
+                          <md-input-container flex>
+                              <label>Cronograma Inicial</label>
+                              <textarea name="scheduling" ng-model="details.define.scheduling" ng-minlength="3" autocomplete="off"></textarea>
+                              <div ng-messages="defineForm.scheduling.$error">
+                                  <div ng-message="minlength">
+                                      O campo exige pelo menos 3 caracteres
+                                  </div>
+                              </div>
+                          </md-input-container>
+                      </section>
+                      <section layout="row" layout-padding>
+                      </section>
+                      <md-button type="submit"  class="md-fab md-fab-bottom-right" aria-label="Save">
+                        <md-icon>save</md-icon>
+                    </md-button>
                   </form>
                 </md-content>
               </md-tab>
-              <md-tab label="medir" ng-disabled="true">
+              <md-tab label="medir" ang-disabled="details.project.currentPhase < 2">
                 <md-content class="md-padding">
                   <h1 class="md-display-2">Medir</h1>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis vulputate. Etiam consequat aliquam cursus. In sodales pretium ultrices. Maecenas lectus est, sollicitudin consectetur felis nec, feugiat ultricies mi. Aliquam erat volutpat. Nam placerat, tortor in ultrices porttitor, orci enim rutrum enim, vel tempor sapien arcu a tellus. Vivamus convallis sodales ante varius gravida. Curabitur a purus vel augue ultrices ultricies id a nisl. Nullam malesuada consequat diam, a facilisis tortor volutpat et. Sed urna dolor, aliquet vitae posuere vulputate, euismod ac lorem. Sed felis risus, pulvinar at interdum quis, vehicula sed odio. Phasellus in enim venenatis, iaculis tortor eu, bibendum ante. Donec ac tellus dictum neque volutpat blandit. Praesent efficitur faucibus risus, ac auctor purus porttitor vitae. Phasellus ornare dui nec orci posuere, nec luctus mauris semper.</p>
-                  <p>Morbi viverra, ante vel aliquet tincidunt, leo dolor pharetra quam, at semper massa orci nec magna. Donec posuere nec sapien sed laoreet. Etiam cursus nunc in condimentum facilisis. Etiam in tempor tortor. Vivamus faucibus egestas enim, at convallis diam pulvinar vel. Cras ac orci eget nisi maximus cursus. Nunc urna libero, viverra sit amet nisl at, hendrerit tempor turpis. Maecenas facilisis convallis mi vel tempor. Nullam vitae nunc leo. Cras sed nisl consectetur, rhoncus sapien sit amet, tempus sapien.</p>
-                  <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
+                  <form class="" ng-submit="details.saveInfo(details.measure)" name="measureForm" novalidate="" layout="column">
+                      <p>Revise o que foi definido anteriormente</p>
+                      <section layout="row" layout-padding>
+                          <md-input-container flex-gt-xs="50">
+                              <label>Y, objetivo e ganho</label>
+                              <input name="y" ng-model="details.measure.y" ng-minlength="3" autocomplete="off">
+                              <div ng-messages="measureForm.y.$error">
+                                  <div ng-message="minlength">
+                                      O nome do cliente deve ter pelo menos 3 caracteres
+                                  </div>
+                              </div>
+                          </md-input-container>
+                          <md-input-container flex-gt-xs="50">
+                              <label>Padrões de desempenho</label>
+                              <textarea name="performanceStandards" ng-model="details.measure.performanceStandards" ng-minlength="3" autocomplete="off"></textarea>
+                              <div ng-messages="measureForm.performanceStandards.$error">
+                                  <div ng-message="minlength">
+                                      O nome do cliente deve ter pelo menos 3 caracteres
+                                  </div>
+                              </div>
+                          </md-input-container>
+                      </section>
+                      <section layout="row" layout-padding>
+                          <md-input-container flex="100" md-no-float>
+                              <label>Análise de Capacidade</label>
+                              <input name="jusCtq" type="file" placeholder="Análise de Capacidade" ng-model="details.measure.capAnalysis">
+                          </md-input-container>
+                      </section>
+                      <section layout="row" layout-padding>
+                          <md-input-container flex>
+                              <label>Testes Estatísticos</label>
+                              <textarea name="tests" ng-model="details.measure.tests" ng-minlength="3" autocomplete="off"></textarea>
+                              <p>Liste e descreva os tipos de testes e análises estatísticas que serão utilizadas</p>
+                              <div ng-messages="measureForm.tests.$error">
+                                  <div ng-message="minlength">
+                                      O nome do cliente deve ter pelo menos 3 caracteres
+                                  </div>
+                              </div>
+                          </md-input-container>
+                      </section>
+                      <section layout="row" layout-padding>
+                          <md-input-container flex="100" md-no-float>
+                              <label>MSA</label>
+                              <input name="msa" type="file" placeholder="msa" ng-model="details.measure.msa">
+                          </md-input-container>
+                      </section>
+                      <section layout="row" layout-padding>
+                          <md-input-container flex="100" md-no-float>
+                              <label>Levantamento de Causa Raiz</label>
+                              <input name="rootCause" type="file" placeholder="Levantamento de Causa Raiz" ng-model="details.measure.rootCause">
+                          </md-input-container>
+                      </section>
+                      <section layout="row" layout-padding>
+                          <md-input-container flex-gt-xs="50">
+                              <label>Dados do Y (onde, quando e com quem)</label>
+                              <input name="dadosY" ng-model="details.measure.dadosY" ng-minlength="3" autocomplete="off">
+                              <div ng-messages="measureForm.dadosY.$error">
+                                  <div ng-message="minlength">
+                                      O nome do cliente deve ter pelo menos 3 caracteres
+                                  </div>
+                              </div>
+                          </md-input-container>
+                          <md-input-container flex-gt-xs="50">
+                              <label>Possíveis X(onde, quando e com quem)</label>
+                              <input name="possibleX" ng-model="details.measure.possibleX" ng-minlength="3" autocomplete="off">
+                              <div ng-messages="measureForm.possibleX.$error">
+                                  <div ng-message="minlength">
+                                      O nome do cliente deve ter pelo menos 3 caracteres
+                                  </div>
+                              </div>
+                          </md-input-container>
+                    </section>
+                    <section layout="row" layout-padding>
+                        <md-input-container flex>
+                            <label>Plano de Coleta de Dados</label>
+                            <textarea name="dataCatchPlan" ng-model="details.dataCatchPlan.tests" ng-minlength="3" autocomplete="off"></textarea>
+                                    <div ng-messages="measureForm.dataCatchPlan.$error">
+                                <div ng-message="minlength">
+                                    O nome do cliente deve ter pelo menos 3 caracteres
+                                </div>
+                            </div>
+                        </md-input-container>
+                    </section>
+                    <section layout="row" layout-padding>
+                        <md-input-container flex>
+                            <label>Mapeamento de Processo</label>
+                            <textarea name="processMapping" ng-model="details.processMapping.tests" ng-minlength="3" autocomplete="off"></textarea>
+                                    <div ng-messages="measureForm.processMapping.$error">
+                                <div ng-message="minlength">
+                                    O nome do cliente deve ter pelo menos 3 caracteres
+                                </div>
+                            </div>
+                        </md-input-container>
+                    </section>
+                    <section layout="row" layout-padding>
+                        <md-input-container flex-gt-xs="50">
+                            <label>Qual a meta de melhoria</label>
+                            <input name="improveTarget" ng-model="details.improveTarget.y" ng-minlength="3" autocomplete="off">
+                            <div ng-messages="measureForm.improveTarget.$error">
+                                <div ng-message="minlength">
+                                    O nome do cliente deve ter pelo menos 3 caracteres
+                                </div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container flex-gt-xs="50">
+                            <label>Qual a aposta financeira?</label>
+                            <textarea name="financialBet" ng-model="details.measure.financialBet" ng-minlength="3" autocomplete="off"></textarea>
+                            <div ng-messages="measureForm.financialBet.$error">
+                                <div ng-message="minlength">
+                                    O nome do cliente deve ter pelo menos 3 caracteres
+                                </div>
+                            </div>
+                        </md-input-container>
+                    </section>
+                  </form>
                 </md-content>
               </md-tab>
-              <md-tab label="analisar">
+              <md-tab label="analisar" ng-disabled="details.project.currentPhase < 3">
                 <md-content class="md-padding">
                   <h1 class="md-display-2">Analisar</h1>
-                  <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
+                  <form class="" ng-submit="details.saveInfo(details.analyze)" name="analyzeForm" novalidate="" layout="column">
+                      <p>Revise as análises estatísticas descritas na fase anterior e atualize se necessário</p>
+                      <section layout="row" layout-padding>
+                          <md-input-container flex-gt-xs="50">
+                              <label>Analises estatísticas</label>
+                              <textarea name="statistical" ng-model="details.analyze.statistical" ng-minlength="3" autocomplete="off"></textarea>
+                              <div ng-messages="analyzeForm.statistical.$error">
+                                  <div ng-message="minlength">
+                                      O nome do cliente deve ter pelo menos 3 caracteres
+                                  </div>
+                              </div>
+                          </md-input-container>
+                      </section>
+                      <section>
+                          <!-- TODO: make FMEA form -->
+                      </section>
+                  </form>
                 </md-content>
               </md-tab>
-              <md-tab label="melhorar">
+              <md-tab label="melhorar" ng-disabled="details.project.currentPhase < 4">
                 <md-content class="md-padding">
                   <h1 class="md-display-2">Melhorar</h1>
-                  <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
+                  <form class="" ng-submit="details.saveInfo(details.improve)" name="improveForm" novalidate="" layout="column">
+                      <section layout="row" layout-padding>
+                          <md-input-container flex>
+                              <label>Estratégia de melhoria</label>
+                              <textarea name="improveStrategy" ng-model="details.improve.improveStrategy" ng-minlength="3" autocomplete="off"></textarea>
+                              <div ng-messages="improveForm.improveStrategy.$error">
+                                  <div ng-message="minlength">
+                                      O nome do cliente deve ter pelo menos 3 caracteres
+                                  </div>
+                              </div>
+                          </md-input-container>
+                      </section>
+                      <section layout="row" layout-padding>
+                          <md-input-container flex>
+                              <label>Ações propostas</label>
+                              <textarea name="popusedActions" ng-model="details.improve.popusedActions" ng-minlength="3" autocomplete="off"></textarea>
+                              <div ng-messages="improveForm.popusedActions.$error">
+                                  <div ng-message="minlength">
+                                      O nome do cliente deve ter pelo menos 3 caracteres
+                                  </div>
+                              </div>
+                          </md-input-container>
+                      </section>
+                      <section layout="row" layout-padding>
+                          <md-input-container flex>
+                              <label>Teste Piloto</label>
+                              <textarea name="firstTest" ng-model="details.improve.firstTest" ng-minlength="3" autocomplete="off"></textarea>
+                              <div ng-messages="improveForm.firstTest.$error">
+                                  <div ng-message="minlength">
+                                      O nome do cliente deve ter pelo menos 3 caracteres
+                                  </div>
+                              </div>
+                          </md-input-container>
+                      </section>
+                      <section layout="row" layout-padding>
+                          <md-input-container flex="100" md-no-float>
+                              <label>DOE (Imagem)</label>
+                              <input name="doeImg" type="file" placeholder="DOE (Imagem)" ng-model="details.measure.doeImg">
+                          </md-input-container>
+                      </section>
+                      <section layout="row" layout-padding>
+                          <md-input-container flex>
+                              <label>DOE (Texto explicativo)</label>
+                              <textarea name="doeText" ng-model="details.improve.doeText" ng-minlength="3" autocomplete="off"></textarea>
+                              <div ng-messages="improveForm.doeText.$error">
+                                  <div ng-message="minlength">
+                                      O nome do cliente deve ter pelo menos 3 caracteres
+                                  </div>
+                              </div>
+                          </md-input-container>
+                      </section>
+                  </form>
                 </md-content>
               </md-tab>
-              <md-tab label="controlar">
+              <md-tab label="controlar" ng-disabled="details.project.currentPhase < 5">
                 <md-content class="md-padding">
                   <h1 class="md-display-2">Controlar</h1>
-                  <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
+                  <form class="" ng-submit="details.saveInfo(details.improve)" name="controlForm" novalidate="" layout="column">
+                      <section layout="row" layout-padding>
+                          <md-input-container flex-gt-xs="50">
+                              <label>Há um Z novo?</label>
+                              <input name="z" ng-model="details.control.z" ng-minlength="3" autocomplete="off">
+                              <div ng-messages="controlForm.z.$error">
+                                  <div ng-message="minlength">
+                                      O campo exige pelo menos 3 caracteres
+                                  </div>
+                              </div>
+                          </md-input-container>
+                          <md-input-container flex-gt-xs="50">
+                              <label>Como foi cacluclado?</label>
+                              <textarea name="howWasCalculed" ng-model="details.control.howWasCalculed" ng-minlength="3" autocomplete="off"></textarea>
+                              <div ng-messages="controlForm.howWasCalculed.$error">
+                                  <div ng-message="minlength">
+                                      O nome do cliente deve ter pelo menos 3 caracteres
+                                  </div>
+                              </div>
+                          </md-input-container>
+                      </section>
+                      <section layout="row" layout-padding>
+                          <md-input-container flex>
+                              <label>Plano de Controle</label>
+                              <textarea name="controlPlan" ng-model="details.control.controlPlan" ng-minlength="3" autocomplete="off"></textarea>
+                              <div ng-messages="controlForm.controlPlan.$error">
+                                  <div ng-message="minlength">
+                                      O nome do cliente deve ter pelo menos 3 caracteres
+                                  </div>
+                              </div>
+                          </md-input-container>
+                      </section>
+                      <section layout="row" layout-padding>
+                          <md-input-container flex>
+                              <label>Relatório Final</label>
+                              <textarea name="finalReport" ng-model="details.control.finalReport" ng-minlength="3" autocomplete="off"></textarea>
+                              <div ng-messages="controlForm.finalReport.$error">
+                                  <div ng-message="minlength">
+                                      O nome do cliente deve ter pelo menos 3 caracteres
+                                  </div>
+                              </div>
+                          </md-input-container>
+                      </section>
+                  </form>
                 </md-content>
               </md-tab>
             </md-tabs>

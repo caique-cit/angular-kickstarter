@@ -23,6 +23,8 @@
                 .state('private.projectDetails', {
                     url: '/project/details/:id',
                     templateUrl: 'components/project/project-details.html',
+                    controller: 'ProjectDetailsController',
+                    controllerAs: 'details',
                     params: {
                         id: null
                     }
