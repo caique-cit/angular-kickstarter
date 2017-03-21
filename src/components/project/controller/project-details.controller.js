@@ -6,19 +6,15 @@
         .module('app.project')
         .controller('ProjectDetailsController', ProjectDetailsController);
 
-        ProjectDetailsController.$inject = ['$mdToast', 'ProjectService', '$state', '$scope', '$stateParams', 'CoreUserService'];
+        ProjectDetailsController.$inject = ['$mdDialog', '$mdToast', 'ProjectService', '$state', '$scope', '$stateParams', 'CoreUserService'];
 
-        function ProjectDetailsController($mdToast, ProjectService, $state, $scope, $stateParams, CoreUserService) {
+        function ProjectDetailsController($mdDialog, $mdToast, ProjectService, $state, $scope, $stateParams, CoreUserService) {
 
             let vm = {
                 project: {},
-                saveFile: saveFile,
-                saveInfo: saveInfo
+                saveInfo: saveInfo,
+                isLoadingFile: null
             };
-
-            function saveFile (model) {
-                console.log(model);
-            }
 
             function saveInfo (phase) {
                 let empties = 0;
@@ -28,7 +24,7 @@
                 switch (vm.project.currentPhase) {
                     case "1" : {
                             phaseName = 'define';
-                            numberOfQuestions = 15;
+                            numberOfQuestions = 11;
                         }
                         break;
                     case "2" : {
@@ -95,6 +91,27 @@
                         $scope.$apply();
                     })
             }
+
+            $scope.$watch(function () {
+                return vm.isLoadingFile
+            }, function (newValue, oldValue) {
+                console.log(oldValue);
+                if (newValue === true && oldValue === null) {
+                    $mdDialog.show({
+                        controller: ProjectDetailsController,
+                        templateUrl: 'components/project/file-upload-loader.html',
+                        parent: angular.element(document.body),
+                        clickOutsideToClose: false,
+                        fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+                    })
+                    .then (function () {
+
+                    })
+
+                } else if (newValue === false) {
+                    $mdDialog.hide();
+                }
+            });
 
             _init();
 

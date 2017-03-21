@@ -39,3 +39,10 @@
 .project-roadmap {
     margin-top: 40px;
 }
+
+.file-reader-buttons {
+    .md-button {
+        width: calc(100% - 15px);
+        display: block;
+    }
+}

@@ -64,13 +64,16 @@
                           </md-input-container>
                       </section>
                       <section layout-gt-xs="row" layout-xs="column" layout-padding>
-                          <md-input-container flex="70" md-no-float ng-hide="details.define.jusCtq">
+                          <md-input-container flex="50" md-no-float >
                               <label>Justificativa de CTQ</label>
-                              <input name="jusCtq" type="file" ng-model="details.define.jusCtq" placeholder="Justificativa de CTQ"  >
+                              <input name="jusCtq" type="file"
+                              firebase-file-reader="['.docx','.doc','.txt']" is-loading-file="details.isLoadingFile"
+                              model="details.define.jusCtq" ng-disabled="details.define.jusCtq !== undefined"  placeholder="Justificativa de CTQ">
                           </md-input-container>
-                          <md-button class="md-raised md-primary" ng-click="details.saveFile(details.define.jusCtq)">
-                              Enviar
-                          </md-button>
+                          <div class="file-reader-buttons">
+                              <md-button ng-show="details.define.jusCtq !== undefined" class="md-raised md-accent" ng-click="details.define.jusCtq = undefined">Selecionar Novo</md-button>
+                              <a class="md-button md-raised md-primary" ng-show="details.define.jusCtq !== undefined" ng-href="{{details.define.jusCtq}}" target="_blank">Baixar</a>
+                          </div>
                       </section>
                       <section layout="row" layout-padding>
                           <md-input-container flex="50">
@@ -89,7 +92,7 @@
                       <section layout="row" layout-padding>
                           <md-input-container flex="50">
                               <label>Ganho previsto ($)</label>
-                              <input name="earnings" ng-model="details.define.earnings">
+                              <input name="earnings" type="number" min="0" ng-model="details.define.earnings">
                           </md-input-container>
                           <md-input-container flex="50">
                               <label>Membros da equipe (separados por virgula)</label>
