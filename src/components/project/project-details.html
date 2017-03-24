@@ -10,11 +10,14 @@
 <section class="project-roadmap">
     <div ng-cloak>
           <md-content>
-            <md-tabs md-dynamic-height md-border-bottom>
+              <md-button ng-click="details.triggerSubmit()" fixed-scrolling-button class="md-fab md-fab-bottom-right" aria-label="Save" style="position: fixed;">
+                <md-icon>save</md-icon>
+              </md-button>
+            <md-tabs md-dynamic-height md-border-bottom md-swipe-content="true">
               <md-tab label="definir">
                 <md-content class="md-padding">
                   <h1 class="md-display-2">Definir</h1>
-                  <form class="" ng-submit="details.saveInfo(details.define)" name="defineForm" novalidate="" layout="column">
+                  <form class="" id="defineForm" name="defineForm" novalidate="" layout="column">
                       <section layout-gt-xs="row" layout-xs="column" layout-padding>
                           <md-input-container flex-gt-xs="50">
                               <label>Quem é o meu cliente?</label>
@@ -64,7 +67,7 @@
                           </md-input-container>
                       </section>
                       <section layout-gt-xs="row" layout-xs="column" layout-padding>
-                          <md-input-container flex="50" md-no-float >
+                          <md-input-container flex="50" flex-xs="100" md-no-float >
                               <label>Justificativa de CTQ</label>
                               <input name="jusCtq" type="file"
                               firebase-file-reader="['.docx','.doc','.txt']" is-loading-file="details.isLoadingFile"
@@ -75,26 +78,26 @@
                               <a class="md-button md-raised md-primary" ng-show="details.define.jusCtq !== undefined" ng-href="{{details.define.jusCtq}}" target="_blank">Baixar</a>
                           </div>
                       </section>
-                      <section layout="row" layout-padding>
-                          <md-input-container flex="50">
+                      <section layout="row" layout-xs="column" layout-padding>
+                          <md-input-container flex="50" flex-xs="100">
                               <label>Qual é o problema?</label>
                               <input name="problem" ng-model="details.define.problem">
                           </md-input-container>
-                          <md-input-container flex="50">
+                          <md-input-container flex="50" flex-xs="100">
                               <label>Qual é o defeito?</label>
                               <input name="defect" ng-model="details.define.defect">
                           </md-input-container>
-                          <md-input-container flex="50">
+                          <md-input-container flex="50" flex-xs="100">
                               <label>Nível atual de defeito</label>
                               <input name="defectLevel" ng-model="details.define.defectLevel">
                           </md-input-container>
                       </section>
-                      <section layout="row" layout-padding>
-                          <md-input-container flex="50">
-                              <label>Ganho previsto ($)</label>
-                              <input name="earnings" type="number" min="0" ng-model="details.define.earnings">
+                      <section layout="row" layout-xs="column" layout-padding>
+                          <md-input-container flex="50" flex-xs="100">
+                              <label>Ganho previsto (R$)</label>
+                              <input name="earnings" type="text" min="0" ng-model="details.define.earnings" ui-money-mask currency-symbol="R$">
                           </md-input-container>
-                          <md-input-container flex="50">
+                          <md-input-container flex="50" flex-xs="100">
                               <label>Membros da equipe (separados por virgula)</label>
                               <input name="team" ng-model="details.define.team">
                           </md-input-container>
@@ -111,10 +114,17 @@
                           </md-input-container>
                       </section>
                       <section layout="row" layout-padding>
+                          <md-input-container flex="50" flex-xs="100" md-no-float >
+                              <label>Diagrama SIPOC do processo</label>
+                              <input name="sipoc" type="file"
+                              firebase-file-reader="['.xls','.xlsx','.csv']" is-loading-file="details.isLoadingFile"
+                              model="details.define.sipoc" ng-disabled="details.define.sipoc !== undefined"  placeholder="Diagrama SIPOC">
+                          </md-input-container>
+                          <div class="file-reader-buttons">
+                              <md-button ng-show="details.define.sipoc !== undefined" class="md-raised md-accent" ng-click="details.define.sipoc = undefined">Selecionar Novo</md-button>
+                              <a class="md-button md-raised md-primary" ng-show="details.define.sipoc !== undefined" ng-href="{{details.define.sipoc}}" target="_blank">Baixar</a>
+                          </div>
                       </section>
-                      <md-button type="submit"  class="md-fab md-fab-bottom-right" aria-label="Save">
-                        <md-icon>save</md-icon>
-                    </md-button>
                   </form>
                 </md-content>
               </md-tab>

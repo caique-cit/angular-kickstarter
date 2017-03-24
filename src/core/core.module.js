@@ -7,10 +7,10 @@
 
 
         // Our reusable framework
-        'fw.exception', 'fw.logger', 'fw.FirebaseFileReader',
+        'fw.exception', 'fw.logger', 'fw.FirebaseFileReader', 'fw.UtilDirectives',
 
         // 3rd Party modules
-        'ui.router', 'permission', 'permission.ui',
+        'ui.router', 'permission', 'permission.ui', 'ui.utils.masks',
 
 
         'dataGrid', 'pagination'

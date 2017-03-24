@@ -120,3 +120,22 @@ form {
         }
     }
 }
+
+.sticky-sidebar {
+    box-shadow: 2px 0px 7px #333;
+}
+
+.button-menu {
+    @include respond-to('md') {
+        display: none;
+    }
+}
+
+.toolbar-logo {
+    display: none;
+    @include respond-to('md') {
+        display: block;
+        height: 70%;
+        margin-right: 10px;
+    }
+}

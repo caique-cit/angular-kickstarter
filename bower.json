@@ -36,7 +36,9 @@
     "angular-bootstrap": "^2.5.0",
     "angular-md5": "^0.1.10",
     "angularfire": "^2.3.0",
-    "firebase": "^3.7.0"
+    "firebase": "^3.7.0",
+    "jquery": "^3.2.1",
+    "angular-input-masks": "^2.5.0"
   },
   "resolutions": {
     "angular": "~1.6.2"

@@ -1,6 +1,38 @@
-<section layout="column" flex="100">
+<md-sidenav md-component-id="sticky" flex="25" md-is-locked-open="$mdMedia('gt-sm')" class="sticky-sidebar">
+  <md-content class="sidebar-header" layout-padding layout="row">
+      <div class="profile-image-container" flex="30">
+          <img ng-src="{{core.getCurrentUser().photoURL}}" alt="Foto de perfil do usuário" />
+      </div>
+      <p class="welcome-message" flex="60">
+          <span>Bem vindo:</span>
+          <br>
+          {{core.getCurrentUser().displayName}}
+      </p>
+  </md-content>
+
+  <nav class="sidebar-menu" layout-padding>
+      <md-list>
+          <md-list-item>
+              <a ui-sref="private.home"><md-icon class="inverted">dashboard</md-icon> Dashboard</a>
+          </md-list-item>
+          <hr>
+          <md-list-item>
+              <a ui-sref="private.projectAdd"><md-icon class="inverted">add_box</md-icon> Novo Projeto</a>
+          </md-list-item>
+          <md-list-item>
+              <a ui-sref="private.home"><md-icon class="inverted">apps</md-icon>Calculadora</a>
+          </md-list-item>
+          <hr>
+          <md-list-item>
+              <a ng-click="core.logout()"><md-icon class="inverted">exit_to_app</md-icon>Sair</a>
+          </md-list-item>
+      </md-list>
+  </nav>
+
+</md-sidenav>
+<section layout="column" flex-sm="100" flex-gt-sm="75" amd-swipe-right="core.toggleLeft()">
     <tmpl-toolbar core-fn="core"></tmpl-toolbar>
-    <md-sidenav md-component-id="left" class="md-sidenav-left" md-disable-backdrop >
+    <md-sidenav md-component-id="left" class="md-sidenav-left" md-disable-backdrop md-swipe-left="core.toggleLeft()">
       <md-content class="sidebar-header" layout-padding layout="row">
           <div class="profile-image-container" flex="30">
               <img ng-src="{{core.getCurrentUser().photoURL}}" alt="Foto de perfil do usuário" />
@@ -19,20 +51,20 @@
               </md-list-item>
               <hr>
               <md-list-item>
-                  <a ui-sref="private.home"><md-icon class="inverted">add_box</md-icon> Novo Projeto</a>
+                  <a ui-sref="private.projectAdd"><md-icon class="inverted">add_box</md-icon> Novo Projeto</a>
               </md-list-item>
               <md-list-item>
                   <a ui-sref="private.home"><md-icon class="inverted">apps</md-icon>Calculadora</a>
               </md-list-item>
               <hr>
               <md-list-item>
-                  <a ui-sref="private.home"><md-icon class="inverted">exit_to_app</md-icon>Sair</a>
+                  <a ng-click="core.logout()"><md-icon class="inverted">exit_to_app</md-icon>Sair</a>
               </md-list-item>
           </md-list>
       </nav>
 
     </md-sidenav>
-    
+
     <md-content flex layout-padding id="content">
         <div ui-view></div>
     </md-content>

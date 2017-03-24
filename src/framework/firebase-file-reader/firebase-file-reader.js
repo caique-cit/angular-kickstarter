@@ -46,6 +46,7 @@
                           // For instance, get the download URL: https://firebasestorage.googleapis.com/...
                           scope.model = uploadTask.snapshot.downloadURL;
                           scope.isLoadingFile = false;
+                          scope.$apply();
                         });
                     }
                 });
