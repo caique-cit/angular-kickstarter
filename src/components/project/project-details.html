@@ -13,7 +13,7 @@
               <md-button ng-click="details.triggerSubmit()" fixed-scrolling-button class="md-fab md-fab-bottom-right" aria-label="Save" style="position: fixed;">
                 <md-icon>save</md-icon>
               </md-button>
-            <md-tabs md-dynamic-height md-border-bottom md-swipe-content="true">
+            <md-tabs md-dynamic-height md-border-bottom md-swipe-content="true" md-selected="details.selectedTab">
               <md-tab label="definir">
                 <md-content class="md-padding">
                   <h1 class="md-display-2">Definir</h1>
@@ -131,7 +131,7 @@
               <md-tab label="medir" ang-disabled="details.project.currentPhase < 2">
                 <md-content class="md-padding">
                   <h1 class="md-display-2">Medir</h1>
-                  <form class="" ng-submit="details.saveInfo(details.measure)" name="measureForm" novalidate="" layout="column">
+                  <form class="" name="measureForm" novalidate="" layout="column">
                       <p>Revise o que foi definido anteriormente</p>
                       <section layout="row" layout-padding>
                           <md-input-container flex-gt-xs="50">
@@ -139,7 +139,7 @@
                               <input name="y" ng-model="details.measure.y" ng-minlength="3" autocomplete="off">
                               <div ng-messages="measureForm.y.$error">
                                   <div ng-message="minlength">
-                                      O nome do cliente deve ter pelo menos 3 caracteres
+                                      O campo exige pelo menos 3 caracteres
                                   </div>
                               </div>
                           </md-input-container>
@@ -148,16 +148,22 @@
                               <textarea name="performanceStandards" ng-model="details.measure.performanceStandards" ng-minlength="3" autocomplete="off"></textarea>
                               <div ng-messages="measureForm.performanceStandards.$error">
                                   <div ng-message="minlength">
-                                      O nome do cliente deve ter pelo menos 3 caracteres
+                                      O campo exige pelo menos 3 caracteres
                                   </div>
                               </div>
                           </md-input-container>
                       </section>
                       <section layout="row" layout-padding>
-                          <md-input-container flex="100" md-no-float>
+                          <md-input-container flex="50" flex-xs="100" md-no-float >
                               <label>Análise de Capacidade</label>
-                              <input name="jusCtq" type="file" placeholder="Análise de Capacidade" ng-model="details.measure.capAnalysis">
+                              <input name="capAnalysis" type="file"
+                              firebase-file-reader="['.docx','.doc','.txt', '.pdf']" is-loading-file="details.isLoadingFile"
+                              model="details.measure.capAnalysis" ng-disabled="details.measure.capAnalysis !== undefined"  placeholder="Análise de Capacidade">
                           </md-input-container>
+                          <div class="file-reader-buttons">
+                              <md-button ng-show="details.measure.capAnalysis !== undefined" class="md-raised md-accent" ng-click="details.measure.capAnalysis = undefined">Selecionar Novo</md-button>
+                              <a class="md-button md-raised md-primary" ng-show="details.measure.capAnalysis !== undefined" ng-href="{{details.measure.capAnalysis}}" target="_blank">Baixar</a>
+                          </div>
                       </section>
                       <section layout="row" layout-padding>
                           <md-input-container flex>
@@ -166,22 +172,34 @@
                               <p>Liste e descreva os tipos de testes e análises estatísticas que serão utilizadas</p>
                               <div ng-messages="measureForm.tests.$error">
                                   <div ng-message="minlength">
-                                      O nome do cliente deve ter pelo menos 3 caracteres
+                                      Os testes devem ter pelo menos 3 caracteres
                                   </div>
                               </div>
                           </md-input-container>
                       </section>
                       <section layout="row" layout-padding>
-                          <md-input-container flex="100" md-no-float>
+                          <md-input-container flex="50" flex-xs="100" md-no-float >
                               <label>MSA</label>
-                              <input name="msa" type="file" placeholder="msa" ng-model="details.measure.msa">
+                              <input name="msa" type="file"
+                              firebase-file-reader="['.docx','.doc','.txt', '.pdf', '.xls', '.xlsx']" is-loading-file="details.isLoadingFile"
+                              model="details.measure.msa" ng-disabled="details.measure.msa !== undefined"  placeholder="MSA">
                           </md-input-container>
+                          <div class="file-reader-buttons">
+                              <md-button ng-show="details.measure.msa !== undefined" class="md-raised md-accent" ng-click="details.measure.msa = undefined">Selecionar Novo</md-button>
+                              <a class="md-button md-raised md-primary" ng-show="details.measure.msa !== undefined" ng-href="{{details.measure.msa}}" target="_blank">Baixar</a>
+                          </div>
                       </section>
                       <section layout="row" layout-padding>
-                          <md-input-container flex="100" md-no-float>
+                          <md-input-container flex="50" flex-xs="100" md-no-float >
                               <label>Levantamento de Causa Raiz</label>
-                              <input name="rootCause" type="file" placeholder="Levantamento de Causa Raiz" ng-model="details.measure.rootCause">
+                              <input name="msa" type="file"
+                              firebase-file-reader="['.docx','.doc','.txt', '.pdf', '.xls', '.xlsx']" is-loading-file="details.isLoadingFile"
+                              model="details.measure.rootCause" ng-disabled="details.measure.rootCause !== undefined"  placeholder="Levantamento de Causa Raiz">
                           </md-input-container>
+                          <div class="file-reader-buttons">
+                              <md-button ng-show="details.measure.rootCause !== undefined" class="md-raised md-accent" ng-click="details.measure.rootCause = undefined">Selecionar Novo</md-button>
+                              <a class="md-button md-raised md-primary" ng-show="details.measure.rootCause !== undefined" ng-href="{{details.measure.rootCause}}" target="_blank">Baixar</a>
+                          </div>
                       </section>
                       <section layout="row" layout-padding>
                           <md-input-container flex-gt-xs="50">
@@ -189,7 +207,7 @@
                               <input name="dadosY" ng-model="details.measure.dadosY" ng-minlength="3" autocomplete="off">
                               <div ng-messages="measureForm.dadosY.$error">
                                   <div ng-message="minlength">
-                                      O nome do cliente deve ter pelo menos 3 caracteres
+                                      Os dados extraidos do Y devem conter no mínimo 3 caracteres
                                   </div>
                               </div>
                           </md-input-container>
@@ -198,7 +216,7 @@
                               <input name="possibleX" ng-model="details.measure.possibleX" ng-minlength="3" autocomplete="off">
                               <div ng-messages="measureForm.possibleX.$error">
                                   <div ng-message="minlength">
-                                      O nome do cliente deve ter pelo menos 3 caracteres
+                                      Os possíveis X devem conter no mínimo 3 caracteres
                                   </div>
                               </div>
                           </md-input-container>
@@ -206,10 +224,10 @@
                     <section layout="row" layout-padding>
                         <md-input-container flex>
                             <label>Plano de Coleta de Dados</label>
-                            <textarea name="dataCatchPlan" ng-model="details.dataCatchPlan.tests" ng-minlength="3" autocomplete="off"></textarea>
+                            <textarea name="dataCatchPlan" ng-model="details.measure.dataCatchPlan" ng-minlength="3" autocomplete="off"></textarea>
                                     <div ng-messages="measureForm.dataCatchPlan.$error">
                                 <div ng-message="minlength">
-                                    O nome do cliente deve ter pelo menos 3 caracteres
+                                    O plano de coleta de dados deve ter pelo menos 3 caracteres
                                 </div>
                             </div>
                         </md-input-container>
@@ -217,10 +235,10 @@
                     <section layout="row" layout-padding>
                         <md-input-container flex>
                             <label>Mapeamento de Processo</label>
-                            <textarea name="processMapping" ng-model="details.processMapping.tests" ng-minlength="3" autocomplete="off"></textarea>
+                            <textarea name="processMapping" ng-model="details.measure.processMapping" ng-minlength="3" autocomplete="off"></textarea>
                                     <div ng-messages="measureForm.processMapping.$error">
                                 <div ng-message="minlength">
-                                    O nome do cliente deve ter pelo menos 3 caracteres
+                                    O mapeamento do processo deve ter pelo menos 3 caracteres
                                 </div>
                             </div>
                         </md-input-container>
@@ -228,10 +246,10 @@
                     <section layout="row" layout-padding>
                         <md-input-container flex-gt-xs="50">
                             <label>Qual a meta de melhoria</label>
-                            <input name="improveTarget" ng-model="details.improveTarget.y" ng-minlength="3" autocomplete="off">
+                            <input name="improveTarget" ng-model="details.measure.improveTarget" ng-minlength="3" autocomplete="off">
                             <div ng-messages="measureForm.improveTarget.$error">
                                 <div ng-message="minlength">
-                                    O nome do cliente deve ter pelo menos 3 caracteres
+                                    A meta de melhoria deve ter pelo menos 3 caracteres
                                 </div>
                             </div>
                         </md-input-container>
@@ -240,7 +258,7 @@
                             <textarea name="financialBet" ng-model="details.measure.financialBet" ng-minlength="3" autocomplete="off"></textarea>
                             <div ng-messages="measureForm.financialBet.$error">
                                 <div ng-message="minlength">
-                                    O nome do cliente deve ter pelo menos 3 caracteres
+                                    A aposta financeira deve ter pelo menos 3 caracteres
                                 </div>
                             </div>
                         </md-input-container>
@@ -265,7 +283,7 @@
                           </md-input-container>
                       </section>
                       <section>
-                          <!-- TODO: make FMEA form -->
+                          <ss-fmea></ss-fmea>
                       </section>
                   </form>
                 </md-content>
@@ -310,7 +328,7 @@
                       <section layout="row" layout-padding>
                           <md-input-container flex="100" md-no-float>
                               <label>DOE (Imagem)</label>
-                              <input name="doeImg" type="file" placeholder="DOE (Imagem)" ng-model="details.measure.doeImg">
+                              <input name="doeImg" type="file" placeholder="DOE (Imagem)" ng-model="details.improve.doeImg">
                           </md-input-container>
                       </section>
                       <section layout="row" layout-padding>

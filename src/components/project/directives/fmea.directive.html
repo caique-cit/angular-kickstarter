@@ -1,0 +1,133 @@
+<div md-layout="column">
+  <md-card flex>
+    <div class="mdl-card__title">
+      <h2 class="mdl-card__title-text">FMEA</h2>
+    </div>
+    <div class="table-container">
+      <table class="mdl-data-table mdl-js-data-table responsive-table">
+        <thead>
+          <th class="mdl-data-table__cell--non-numeric">
+            Etapa do Processo
+          </th>
+          <th class="mdl-data-table__cell--non-numeric">
+            Modo de falha potencial
+          </th>
+          <th class="mdl-data-table__cell--non-numeric">
+            Potencial efeito
+          </th>
+          <th class="mdl-data-table__cell--non-numeric">
+            SEV
+          </th>
+          <th class="mdl-data-table__cell--non-numeric">
+            Potenciais causas
+          </th>
+          <th class="mdl-data-table__cell--non-numeric">
+            OCC
+          </th>
+          <th class="mdl-data-table__cell--non-numeric">
+            Controles atuais
+          </th>
+          <th class="mdl-data-table__cell--non-numeric">
+            DET
+          </th>
+          <th class="mdl-data-table__cell--non-numeric">
+            RPN
+          </th>
+          <th class="mdl-data-table__cell--non-numeric">
+            Ações
+          </th>
+        </thead>
+        <tbody>
+          <tr ng-repeat="item in fmea">
+            <td class="mdl-data-table__cell--non-numeric">
+              {{item.etapa}}
+            </td>
+            <td class="mdl-data-table__cell--non-numeric">
+              {{item.falha}}
+            </td>
+            <td class="mdl-data-table__cell--non-numeric">
+              {{item.efeito}}
+            </td>
+            <td class="mdl-data-table__cell--non-numeric">
+              {{item.sev}}
+            </td>
+            <td class="mdl-data-table__cell--non-numeric">
+              {{item.causas}}
+            </td>
+            <td class="mdl-data-table__cell--non-numeric">
+              {{item.occ}}
+            </td>
+            <td class="mdl-data-table__cell--non-numeric">
+              {{item.controles}}
+            </td>
+            <td class="mdl-data-table__cell--non-numeric">
+              {{item.det}}
+            </td>
+            <td class="mdl-data-table__cell--non-numeric">
+              {{item.rpn}}
+            </td>
+            <td class="mdl-data-table__cell--non-numeric">
+              <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent remove-fmea" ng-click="removeItem($index)">
+                <i class="material-icons">delete</i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    </md-card>
+</div>
+<md-card layout="column" flex="50" flex-xs="100">
+    <div >
+        <div class="mdl-card__title mdl-card--expand">
+          <h2 class="mdl-card__title-text">FMEA - Novo item</h2>
+        </div>
+
+        <section layout="column" flex layout-padding>
+            <md-input-container>
+                <label>Etapa do Processo</label>
+                <input type="text" id="etapa" name="etapa" ng-model="etapa">
+            </md-input-container>
+
+            <md-input-container>
+                <label>Modo de falha potencial</label>
+                <input class="mdl-textfield__input" type="text" id="falha" name="falha" ng-model="falha">
+            </md-input-container>
+
+            <md-input-container>
+                <label>Potencial efeito</label>
+                <input class="mdl-textfield__input" type="text" id="efeito" name="falha" ng-model="efeito">
+            </md-input-container>
+
+            <md-input-container>
+                <label>SEV</label>
+                <input class="mdl-textfield__input" type="text" id="sev" name="sev" ng-model="sev">
+            </md-input-container>
+
+            <md-input-container>
+                <label>Potenciais causas</label>
+                <input class="mdl-textfield__input" type="text" id="causas" name="causas" ng-model="causas">
+            </md-input-container>
+
+            <md-input-container>
+                <label>OCC</label>
+                <input class="mdl-textfield__input" type="text" id="occ" name="occ" ng-model="occ">
+            </md-input-container>
+
+            <md-input-container>
+                <label>Controles Atuais</label>
+                <input class="mdl-textfield__input" type="text" id="controles" name="controles" ng-model="controles">
+            </md-input-container>
+
+            <md-input-container>
+                <label>DET</label>
+                <input class="mdl-textfield__input" type="text" id="det" name="det" ng-model="det">
+            </md-input-container>
+
+            <br>
+            <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="add-fmea">
+                <i class="material-icons">add</i>
+            </button>
+        </section>
+    </div>
+</md-card>

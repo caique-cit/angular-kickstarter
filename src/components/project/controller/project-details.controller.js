@@ -13,31 +13,40 @@
             let vm = {
                 isLoadingFile: null,
                 project: {},
+                selectedTab: null,
                 triggerSubmit: triggerSubmit
             };
 
             function triggerSubmit () {
+                let phasesToSave = []
                 let phaseToSave = {};
-                let phaseName = '';
+
 
                 if (vm.define) {
-                    phaseToSave = vm.define;
-                    phaseName = 'define';
-                } else if (vm.measure) {
-                    phaseToSave = vm.measure;
-                    phaseName = 'measure';
-                } else if (vm.analyze) {
-                    phaseToSave = vm.analyze;
-                    phaseName = 'analyze';
-                } else if (vm.improve) {
-                    phaseToSave = vm.improve;
-                    phaseName = 'improve';
-                } else if (vm.control) {
-                    phaseToSave = vm.control;
-                    phaseName = 'control';
+                    phaseToSave.data = vm.define;
+                    phaseToSave.phaseName = 'define';
+                    phasesToSave.push(phaseToSave);
+                } if (vm.measure) {
+                    phaseToSave.data = vm.measure;
+                    phaseToSave.phaseName = 'measure';
+                    phasesToSave.push(phaseToSave);
+                } if (vm.analyze) {
+                    phaseToSave.data = vm.analyze;
+                    phaseToSave.phaseName = 'analyze';
+                    phasesToSave.push(phaseToSave);
+                } if (vm.improve) {
+                    phaseToSave.data = vm.improve;
+                    phaseToSave.phaseName = 'improve';
+                    phasesToSave.push(phaseToSave);
+                } if (vm.control) {
+                    phaseToSave.data = vm.control;
+                    phaseToSave.phaseName = 'control';
+                    phasesToSave.push(phaseToSave);
                 }
 
-                _saveInfo(phaseToSave, phaseName);
+                angular.forEach(phasesToSave, function (phase) {
+                    _saveInfo(phase.data, phase.phaseName);
+                });
 
             }
 
@@ -123,6 +132,8 @@
                     .then(function (response) {
                         vm.project = response.val();
                         vm.define = vm.project.phases.define.answers;
+                        vm.measure = vm.project.phases.measure.answers;
+                        vm.selectedTab = vm.project.currentPhase;
                         $scope.$apply();
                     })
             }
