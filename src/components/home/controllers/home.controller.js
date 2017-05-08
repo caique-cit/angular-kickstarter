@@ -6,9 +6,9 @@
         .module('app.home')
         .controller('HomeController', HomeController);
 
-        HomeController.$inject = ['logger','HomeService','$mdDialog', '$rootScope', 'ProjectService', 'CoreUserService', '$scope'];
+        HomeController.$inject = ['logger','HomeService', '$mdToast', '$mdDialog', '$rootScope', 'ProjectService', 'CoreUserService', '$scope'];
 
-        function HomeController (logger, HomeService, $mdDialog, $rootScope, ProjectService, CoreUserService, $scope) {
+        function HomeController (logger, HomeService, $mdToast, $mdDialog, $rootScope, ProjectService, CoreUserService, $scope) {
             var vm = this;
 
             vm.projects = [];
@@ -16,10 +16,10 @@
             vm.pager = {};
             vm.isLoading = true;
             vm.pager.itemsPerPage = '12';
+            vm.removeProject = removeProject;
 
-
-            $rootScope.$on('post_update', function(event, data) {
-                activate();
+            $rootScope.$on('project_update', function(event, data) {
+              _init();
             });
 
             function _getProjects () {
@@ -29,6 +29,7 @@
                     .then(function (response) {
 
                         let receivedVal = response.val();
+                        vm.projects = [];
 
                         Object.keys(receivedVal).map((key, val) => {
                             let newProject = receivedVal[key];
@@ -42,16 +43,34 @@
                     })
             }
 
-            vm.showDialog = function(post) {
+            vm.showDialog = function(project, callback) {
 
                 $mdDialog.show({
                     templateUrl: 'components/home/delete-dialog.html',
                     controller: 'DeleteController',
                     controllerAs: 'delete',
-                     locals : {
-                        project : project
+                    locals : {
+                        project : project,
+                        callback: callback
                     }
                 });
+            }
+            
+            function removeProject (projectId) {
+              let database = firebase.database().ref();
+              
+              database
+                .child('users')
+                    .child(CoreUserService.getCurrentUser().uid)
+                    .child('projects')
+                    .child(projectId)
+                    .remove();
+                    
+                    $mdToast.show(
+                        $mdToast.simple()
+                            .textContent('Projeto removido com sucesso')
+                            .hideDelay(3000)
+                    );
             }
 
             function _init() {

@@ -1,17 +1,18 @@
 <md-dialog aria-label="delete" ng-cloak>
         <md-dialog-content>
             <div class="md-dialog-content">
-               <h2 class="md-title ng-binding">Would you like to delete your post?</h2>
+               <h2 class="md-title ng-binding">Tem certeza que deseja deletar esse projeto?</h2>
+               <p>Essa ação não pode ser desfeita!</p>
             </div>
         </md-dialog-content>
 
         <md-dialog-actions layout="row">
             <span flex></span>
-            <md-button type="submit" class="md-primary" ng-click="vm.remove();" aria-label="ok">
-                ok
+            <md-button type="submit" class="md-primary" ng-click="delete.remove();" aria-label="ok">
+                Deletar
             </md-button>
-            <md-button type="button" aria-label="No" ng-click="vm.hideDialog()">
-                No
+            <md-button type="button" aria-label="No" ng-click="delete.hideDialog()">
+                Não Deletar
             </md-button>
         </md-dialog-actions>
 </md-dialog>

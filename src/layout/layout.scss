@@ -4,6 +4,10 @@
 
 // Common layout definitions
 
+md-toast {
+    position: fixed;
+}
+
 [layout-wrap] {
 -webkit-flex-wrap: wrap;
 -ms-flex-wrap: wrap;

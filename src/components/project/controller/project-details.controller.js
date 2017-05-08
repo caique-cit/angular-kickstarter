@@ -64,6 +64,13 @@
                         break;
                     case "analyze" : {
                             numberOfQuestions = 2;
+                            for (let i = 0; i < phase.fmea.length; i++) {
+                                if (phase.fmea[i].$$hashKey) {
+                                    let newItem = {};
+                                    angular.copy(phase.fmea[i], newItem);
+                                    angular.copy(newItem, phase.fmea[i]);
+                                }
+                            }
                         }
                         break;
                     case "improve" : {
@@ -109,12 +116,14 @@
                 newPhase['users/' + CoreUserService.getCurrentUser().uid + '/projects/' + $stateParams.id + '/phases/' + phaseName + '/answers'] = phase;
 
                 database.update(newPhase)
-                    .then(function  (response) {
+                    .then(function (response) {
+
                         $mdToast.show(
                             $mdToast.simple()
-                                .textContent('Progresso salvo com sucesso')
-                                .hideDelay(3000)
+                            .textContent('Progresso salvo com sucesso')
+                            .hideDelay(3000)
                         );
+
                     })
                     .catch(function (error) {
                         throw error;
@@ -133,6 +142,7 @@
                         vm.project = response.val();
                         vm.define = vm.project.phases.define.answers;
                         vm.measure = vm.project.phases.measure.answers;
+                        vm.analyze = vm.project.phases.analyze.answers;
                         vm.selectedTab = vm.project.currentPhase;
                         $scope.$apply();
                     })

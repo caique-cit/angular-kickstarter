@@ -29,6 +29,7 @@
             core.logout = logout;
             core.toggleLeft = toggleLeft
             core.getCurrentUser = getCurrentUser
+            core.closeSidenav = closeSidenav
 
             function getCurrentUser () {
                 return CoreUserService.getCurrentUser();
@@ -41,6 +42,10 @@
 
             function toggleLeft () {
                 $mdSidenav('left').toggle();
+            }
+
+            function closeSidenav () {
+                $mdSidenav('left').close();
             }
 
             /**

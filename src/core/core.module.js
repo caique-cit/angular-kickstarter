@@ -13,6 +13,6 @@
         'ui.router', 'permission', 'permission.ui', 'ui.utils.masks',
 
 
-        'dataGrid', 'pagination'
+        //'dataGrid', 'pagination'
     ]);
 })();

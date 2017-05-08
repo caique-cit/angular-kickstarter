@@ -9,10 +9,10 @@
     </div>
     <md-button md-no-ink class="md-raised md-primary md-button md-ink-ripple" ui-sref="private.projectAdd">&nbsp;<md-icon class="material-icons">add_box</md-icon>&nbsp;Novo Projeto&nbsp;</md-button>
 </md-content>
-<div class='md-padding' layout="row" flex ng-if="home.projects.length > 0 && !home.isLoading">
+<div class='md-padding custom-background' layout="row" flex ng-if="home.projects.length > 0 && !home.isLoading">
   <div layout="row" flex layout-wrap>
     <div class="parent" layout="column" ng-repeat="project in home.projects track by $index" flex="33" flex-sm="50" flex-xs="100">
-      <md-card md-theme-watch>
+      <md-card md-theme-watch class="dash-card">
           <a ui-sref="private.projectDetails({id: project.pid})" class="card-link">
                 <md-card-title>
                   <md-card-title-text>
@@ -20,15 +20,15 @@
                   </md-card-title-text>
                 </md-card-title>
                 <md-card-content>
-                  <p>{{project.startDate}}</p>
-                  <p>{{project.endDate}}</p>
+                  <p class="start-date">Data de início: {{project.startDate | date:'dd/MM/yyyy' }}</p>
+                  <p class="end-date">Data de término: {{project.endDate | date:'dd/MM/yyyy'}}</p>
                   <hr>
                   <p>{{project.notes}}</p>
                 </md-card-content>
             </a>
         <md-card-actions layout="row" layout-align="end center">
-          <md-button ui-sref="private.edit({id: project.pid})">Edit</md-button>
-          <md-button ng-click="home.showDialog(project)">Delete</md-button>
+          <md-button ui-sref="private.projectEdit({id: project.pid})"><md-icon class="inverted">edit</md-icon></md-button>
+          <md-button  ng-click="home.showDialog(project, home.removeProject)"><md-icon class="inverted">delete</md-icon ></md-button>
         </md-card-actions>
       </md-card>
     </div>

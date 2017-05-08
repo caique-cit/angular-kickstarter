@@ -6,21 +6,18 @@
         .module('app.home')
         .controller('DeleteController', DeleteController);
 
-        DeleteController.$inject = ['$scope', 'post', 'HomeService', '$mdDialog'];
+        DeleteController.$inject = ['$scope', 'project', 'callback', 'HomeService', '$mdDialog'];
 
-        function DeleteController($scope, post, HomeService, $mdDialog) {
+        function DeleteController($scope, project, callback, HomeService, $mdDialog) {
             
             var vm = this;
-            $scope.post = post;
+            $scope.project = project;
 
             vm.remove = function() {
 
-                HomeService.delete($scope.post.id).then(function() {
-
-                }).finally(function() {
-                    $scope.$emit('post_update', 1);
-                    $mdDialog.hide();
-                });
+                callback(project.pid);  
+                $scope.$emit('project_update', 1);
+                $mdDialog.hide();
             }
 
             vm.hideDialog = function() {

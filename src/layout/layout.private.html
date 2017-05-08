@@ -20,6 +20,9 @@
               <a ui-sref="private.projectAdd"><md-icon class="inverted">add_box</md-icon> Novo Projeto</a>
           </md-list-item>
           <md-list-item>
+              <a ui-sref="private.templates"><md-icon class="inverted">insert_drive_file</md-icon>Templates</a>
+          </md-list-item>
+          <md-list-item>
               <a ui-sref="private.home"><md-icon class="inverted">apps</md-icon>Calculadora</a>
           </md-list-item>
           <hr>
@@ -30,7 +33,7 @@
   </nav>
 
 </md-sidenav>
-<section layout="column" flex-sm="100" flex-gt-sm="75" amd-swipe-right="core.toggleLeft()">
+<section layout="column" flex-sm="100" flex-xs="100" flex-gt-sm="75" amd-swipe-right="core.toggleLeft()">
     <tmpl-toolbar core-fn="core"></tmpl-toolbar>
     <md-sidenav md-component-id="left" class="md-sidenav-left" md-disable-backdrop md-swipe-left="core.toggleLeft()">
       <md-content class="sidebar-header" layout-padding layout="row">
@@ -47,14 +50,17 @@
       <nav class="sidebar-menu" layout-padding>
           <md-list>
               <md-list-item>
-                  <a ui-sref="private.home"><md-icon class="inverted">dashboard</md-icon> Dashboard</a>
+                  <a ui-sref="private.home" ng-click="core.closeSidenav()"><md-icon class="inverted">dashboard</md-icon> Dashboard</a>
               </md-list-item>
               <hr>
               <md-list-item>
-                  <a ui-sref="private.projectAdd"><md-icon class="inverted">add_box</md-icon> Novo Projeto</a>
+                  <a ui-sref="private.projectAdd" ng-click="core.closeSidenav()"><md-icon class="inverted">add_box</md-icon> Novo Projeto</a>
               </md-list-item>
               <md-list-item>
-                  <a ui-sref="private.home"><md-icon class="inverted">apps</md-icon>Calculadora</a>
+                <a ui-sref="private.templates"><md-icon class="inverted">insert_drive_file</md-icon>Templates</a>
+              </md-list-item>
+              <md-list-item>
+                  <a ui-sref="private.home" ng-click="core.closeSidenav()"><md-icon class="inverted">apps</md-icon>Calculadora</a>
               </md-list-item>
               <hr>
               <md-list-item>

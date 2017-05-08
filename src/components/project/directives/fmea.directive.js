@@ -8,13 +8,16 @@
           return {
             restrict: 'E',
             templateUrl: 'components/project/directives/fmea.directive.html',
+            scope: {
+                model: '='
+            },
             link: function (scope, elem, attrs) {
-              if(!scope.fmea) {
-                scope.fmea = [];
+              if(!scope.model) {
+                scope.model = [];
               }
 
               scope.removeItem = function(index) {
-                scope.fmea.splice(index, 1);
+                scope.model.splice(index, 1);
               };
 
               //add fma function
@@ -39,7 +42,7 @@
                 scope.controles = '';
                 scope.det = '';
 
-                scope.fmea.push(scope.item);
+                scope.model.push(scope.item);
 
                 if(scope && !scope.$$phase) {
                   scope.$apply();

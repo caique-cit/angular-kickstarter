@@ -13,23 +13,35 @@
             let projects = {};
             let vm = {
                 project: {},
-                addProject: addProject
+                isNew: true,
+                addProject: addProject,
+                removeProject: removeProject
             };
 
             function _init() {
                 _setProjectModel();
               if ($stateParams.id) {
+                vm.isNew = false;
                 _populateViewModel();
               }
             }
 
             function _populateViewModel() {
-                  ProjectService.getUpdateProject().then(function(dataProject) {
-                      vm.post = dataProject.data.data;
-                      vm.post.title = vm.post.title;
-                      vm.post.slug = vm.post.slug;
-                      vm.post.content = vm.post.content;
-                  });
+                let database = firebase.database().ref();
+
+                database
+                    .child('users')
+                    .child(CoreUserService.getCurrentUser().uid)
+                    .child('projects')
+                    .child($stateParams.id)
+                    .once('value')
+                    .then(function (response) {
+                        vm.project = response.val();
+                        vm.project.endDate = new Date(vm.project.endDate);
+                        vm.project.startDate = new Date(vm.project.startDate);
+                        $scope.$apply();
+                    });
+
             }
 
             function _setProjectModel () {
@@ -39,27 +51,27 @@
                     startDate: new Date(),
                     endDate: new Date(),
                     notes: "",
-                    currentPhase: "1",
-                    isDone: "false",
+                    currentPhase: 1,
+                    isDone: false,
                     phases: {
                         define: {
-                            isDone: "false",
+                            isDone: false,
                             answers: ""
                         },
                         measure: {
-                            isDone: "false",
+                            isDone: false,
                             answers: ""
                         },
                         analyze: {
-                            isDone: "false",
+                            isDone: false,
                             answers: ""
                         },
                         improve: {
-                            isDone: "false",
+                            isDone: false,
                             answers: ""
                         },
                         control: {
-                            isDone: "false",
+                            isDone: false,
                             answers: ""
                         }
                     }
@@ -68,12 +80,22 @@
 
             function addProject (newProject) {
                 let database = firebase.database().ref();
-
-                let newProjectKey = database
+                
+                let feedbackMessage = 'Projeto editado com sucesso';
+                let newProjectKey = $stateParams.id;
+                
+                if (vm.isNew) {
+                  feedbackMessage = 'Novo projeto adicionado com sucesso';
+                  
+                  newProjectKey = database
                     .child('users')
                     .child(CoreUserService.getCurrentUser().uid)
                     .child('projects')
                     .push().key;
+                }
+                
+                newProject.endDate = new Date(newProject.endDate);
+                newProject.startDate = new Date(newProject.startDate);
 
                 projects['users/' + CoreUserService.getCurrentUser().uid + '/projects/' + newProjectKey] = newProject;
 
@@ -81,7 +103,7 @@
                     .then(function  (response) {
                         $mdToast.show(
                             $mdToast.simple()
-                                .textContent('Novo projeto adicionado com sucesso')
+                                .textContent(feedbackMessage)
                                 .hideDelay(3000)
                         );
                         $state.go('private.home');
@@ -89,6 +111,23 @@
                     .catch(function (error) {
                         throw error;
                     });
+            }
+            
+            function removeProject (projectId) {
+              let database = firebase.database().ref();
+              
+              database
+                .child('users')
+                    .child(CoreUserService.getCurrentUser().uid)
+                    .child('projects')
+                    .child(projectId)
+                    .remove();
+                    
+                    $mdToast.show(
+                        $mdToast.simple()
+                            .textContent('Projeto removido com sucesso')
+                            .hideDelay(3000)
+                    );
             }
 
             _init();

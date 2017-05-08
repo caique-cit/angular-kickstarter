@@ -1,6 +1,7 @@
 <md-content layout-padding>
-    <h2>Novo Projeto</h2>
-    <md-card flex-gt-xs="50" layout-padding class="form-card">
+    <h2 ng-if="vm.isNew">Novo Projeto</h2>
+    <h2 ng-if="!vm.isNew">Editar Projeto: {{vm.project.name}}</h2>
+    <md-card flex="100" layout-padding class="form-card">
         <form name="projectForm" data-ng-submit="vm.addProject(vm.project)" novalidate flex>
         <div layout="column">
             <md-input-container>
@@ -25,8 +26,9 @@
         <div layout="row">
             <md-button type="submit" class="md-primary md-raised"
               ng-disabled="projectForm.$invalid"
-              aria-label="Criar">
-                Criar
+              aria-label="Criar ou Editar">
+                <span ng-if="vm.isNew">Criar</span>
+                <span ng-if="!vm.isNew">Editar</span>
             </md-button>
             <md-button md-no-ink class="md-primary" ui-sref="private.home">Cancelar</md-button>
         </div>
