@@ -5,6 +5,7 @@
         <h4>termina em: {{ details.project.endDate | date:'dd/MM/yyyy' }}</h4>
         <hr>
         <md-button class="md-primary" ui-sref="private.home"&nbsp;><md-icon>arrow_back</md-icon>&nbsp;Voltar&nbsp;</md-button>
+        <md-button class="md-primary md-raised md-fab export-file-btn" ng-click="details.exportPptx()"><md-icon>file_download</md-icon></md-button>
     </div>
 </header>
 <section class="project-roadmap">

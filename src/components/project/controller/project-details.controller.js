@@ -6,14 +6,15 @@
         .module('app.project')
         .controller('ProjectDetailsController', ProjectDetailsController);
 
-        ProjectDetailsController.$inject = ['$mdDialog', '$mdToast', 'ProjectService', '$state', '$scope', '$stateParams', 'CoreUserService'];
+        ProjectDetailsController.$inject = ['$mdDialog', '$mdToast', 'ProjectService', 'ExportService', '$state', '$scope', '$stateParams', 'CoreUserService'];
 
-        function ProjectDetailsController($mdDialog, $mdToast, ProjectService, $state, $scope, $stateParams, CoreUserService) {
+        function ProjectDetailsController($mdDialog, $mdToast, ProjectService, ExportService, $state, $scope, $stateParams, CoreUserService) {
 
             let vm = {
                 isLoadingFile: null,
                 project: {},
                 selectedTab: null,
+                exportPptx: exportPptx,
                 triggerSubmit: triggerSubmit
             };
 
@@ -168,6 +169,14 @@
                     vm.isLoadingFile = null;
                 }
             });
+            
+            function exportPptx () {
+            
+              if (vm.project) {
+                let press = ExportService.initPresentation(vm.project);
+                ExportService.savePresentation(press);
+              }
+            }
 
             _init();
 

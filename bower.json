@@ -38,7 +38,9 @@
     "angularfire": "^2.3.0",
     "firebase": "^3.7.0",
     "jquery": "^3.2.1",
-    "angular-input-masks": "^2.5.0"
+    "angular-input-masks": "^2.5.0",
+    "jszip": "^3.1.3",
+    "pptxgenjs": "^1.4.0"
   },
   "resolutions": {
     "angular": "~1.6.2"
