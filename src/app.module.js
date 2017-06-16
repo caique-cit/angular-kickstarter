@@ -6,6 +6,8 @@
         'app.core',
 
         // Features (listed alphabetically)
+        'app.calculator',
+        'app.help',
         'app.home',
         'app.login',
         'app.project',

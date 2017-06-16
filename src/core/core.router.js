@@ -46,10 +46,17 @@
             url: '/project/new',
             template: '<tpl-project></tpl-project>',
           })
-          
+
           .state('private.templates', {
             url: '/templates',
             templateUrl: 'components/templates/templates.html',
+          })
+
+          .state('private.calculator', {
+            url: '/calculator',
+            templateUrl: 'components/calculator/calculator.html',
+            controller: 'CalculatorController',
+            controllerAs: 'calc'
           })
 
           .state('private.projectDetails', {
@@ -80,7 +87,7 @@
               }
             }
           })
-          
+
           .state('public.register', {
             url: '/register',
             templateUrl: 'components/register/register.html',

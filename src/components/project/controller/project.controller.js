@@ -17,6 +17,25 @@
                 addProject: addProject,
                 removeProject: removeProject
             };
+            
+            // watch start date to validate if it's not greater than end date
+            $scope.$watch(function () {
+              return vm.project.startDate;
+            }, _compareValues);
+            
+            // watch end date to validate if it isn't less than start date
+            $scope.$watch(function () {
+              return vm.project.endDate;
+            }, _compareValues);
+            
+            function _compareValues () {
+              let valid = false;
+
+              valid = moment(vm.project.endDate).isAfter(vm.project.startDate);
+              
+              $scope.projectForm.endDate.$setValidity("mindate", valid);
+
+            }
 
             function _init() {
                 _setProjectModel();

@@ -19,6 +19,7 @@
         '$logProvider',
         '$mdIconProvider',
         '$mdThemingProvider',
+        '$mdDateLocaleProvider',
         'exceptionHandlerProvider',
         '$httpProvider',
         'CacheFactoryProvider'
@@ -30,6 +31,7 @@
         $logProvider,
         $mdIconProvider,
         $mdThemingProvider,
+        $mdDateLocaleProvider,
         exceptionHandlerProvider,
         $httpProvider,
         CacheFactoryProvider){
@@ -45,6 +47,10 @@
         }
 
         exceptionHandlerProvider.configure(config.appErrorPrefix);
+        
+        $mdDateLocaleProvider.formatDate = function(date) {
+           return moment(date).format('DD/MM/YYYY');
+        };
 
         $mdIconProvider
             .iconSet('content', 'images/content-icons.svg', 24)

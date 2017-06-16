@@ -13,13 +13,20 @@
                   </div>
               </div>
             </md-input-container>
-
-            <md-datepicker ng-model="vm.project.startDate" md-placeholder="Data Inicial" required></md-datepicker>
-
-            <md-datepicker ng-model="vm.project.endDate" md-placeholder="Data Final" required></md-datepicker>
-
+            
+            <label>Data Inicial</label>
+            <md-datepicker ng-model="vm.project.startDate" name="startDate" md-placeholder="Data Inicial" required md-is-open="vm.initialIsOpen"></md-datepicker>
+            
+            <label>Data Final</label>
+            <md-datepicker ng-model="vm.project.endDate" name="endDate" md-placeholder="Data Final" required md-is-open="vm.finalIsOpen"></md-datepicker>
+            <div ng-messages="projectForm.endDate.$error">
+                  <div ng-message="mindate">
+                      A data final não pode ser inferior à data inicial
+                  </div>
+              </div>
+              
             <md-input-container>
-                  <label>Notes</label>
+                  <label>Notas</label>
                   <input type="text" ng-model="vm.project.notes" md-maxlength="250">
             </md-input-container>
         </div>

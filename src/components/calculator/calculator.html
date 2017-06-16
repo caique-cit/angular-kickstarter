@@ -1,0 +1,40 @@
+<md-content layout-padding>
+  <h2>Calculadora</h2>
+  <p>Faça cáculos comuns à um projeto, de maneira fácil e rápida.</p>
+  <div layout="row">
+    <md-card flex-xs="100" flex-gt-xs="50" layout-padding class="form-card">
+        <form name="calculatorForm" data-ng-submit="calc.calculate()" novalidate flex>
+        <div layout="column">
+            <md-input-container>
+              <label>Número de defeitos</label>
+              <input name="title" ng-model="calc.data.defNumber" required autocomplete="off">
+            </md-input-container>
+
+            <md-input-container>
+              <label>Número de oportunidades</label>
+              <input name="title" ng-model="calc.data.opportunities" required autocomplete="off">
+            </md-input-container>
+
+            <md-input-container>
+              <label>Número de unidades</label>
+              <input name="title" ng-model="calc.data.unities" required autocomplete="off">
+            </md-input-container>
+
+        </div>
+        <div layout="row">
+            <md-button type="submit" class="md-primary md-raised"
+              ng-disabled="calculatorForm.$invalid"
+              aria-label="Calcular">Calcular
+            </md-button>
+        </div>
+        </form>
+    </md-card>
+    <md-card flex-xs="100" flex-gt-xs="50" layout-padding class="form-card">
+      <h4>Resultados</h4>
+      <p>DPMO: {{calc.dpmo | number:2}}</p>
+      <p>Porcentagem de defeitos: {{calc.defPercent | number:2}}</p>
+      <p>Rendimento: {{calc.yeld | number:2}}</p>
+      <p>Nível Sigma: {{calc.processSigma}}</p>
+    </md-card>
+  </div>
+</md-content>
